@@ -18,6 +18,16 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
   const [erroRecuperar, setErroRecuperar] = useState('');
   const [sucessoRecuperar, setSucessoRecuperar] = useState('');
 
+  // Modal cadastro
+  const [modalCadastro, setModalCadastro] = useState(false);
+  const [novoNome, setNovoNome] = useState('');
+  const [novoEmail, setNovoEmail] = useState('');
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmSenha, setConfirmSenha] = useState('');
+  const [enviandoCadastro, setEnviandoCadastro] = useState(false);
+  const [erroCadastro, setErroCadastro] = useState('');
+  const [sucessoCadastro, setSucessoCadastro] = useState('');
+
   async function handleLogin() {
     if (!email || !senha) {
       setErro('Preencha email e senha.');
@@ -26,12 +36,12 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
     setErro('');
     setLoading(true);
     const { login } = require('../utils/storage');
-    const usuario = await login(email.trim().toLowerCase(), senha);
+    const { usuario, erro: erroLogin } = await login(email.trim().toLowerCase(), senha);
     setLoading(false);
     if (usuario) {
       onLogin();
     } else {
-      setErro('Email ou senha incorretos.');
+      setErro(erroLogin || 'Email ou senha incorretos.');
     }
   }
 
@@ -57,6 +67,46 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
       setErroRecuperar(err);
     } else {
       setSucessoRecuperar('Enviamos um link de recuperação para seu email. Verifique sua caixa de entrada.');
+    }
+  }
+
+  function abrirModalCadastro() {
+    setNovoNome('');
+    setNovoEmail('');
+    setNovaSenha('');
+    setConfirmSenha('');
+    setErroCadastro('');
+    setSucessoCadastro('');
+    setModalCadastro(true);
+  }
+
+  async function enviarCadastro() {
+    if (!novoNome || !novoEmail || !novaSenha) {
+      setErroCadastro('Preencha todos os campos.');
+      return;
+    }
+    if (novaSenha.length < 6) {
+      setErroCadastro('A senha deve ter pelo menos 6 caracteres.');
+      return;
+    }
+    if (novaSenha !== confirmSenha) {
+      setErroCadastro('As senhas não coincidem.');
+      return;
+    }
+    setErroCadastro('');
+    setSucessoCadastro('');
+    setEnviandoCadastro(true);
+    const { cadastrarUsuario } = require('../utils/storage');
+    const err = await cadastrarUsuario(novoNome, novoEmail.trim().toLowerCase(), novaSenha);
+    setEnviandoCadastro(false);
+    if (err) {
+      setErroCadastro(err);
+    } else {
+      setSucessoCadastro('Conta criada! Aguarde a ativação pelo administrador para fazer login.');
+      setNovoNome('');
+      setNovoEmail('');
+      setNovaSenha('');
+      setConfirmSenha('');
     }
   }
 
@@ -114,6 +164,12 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
         <TouchableOpacity style={styles.linkRecuperar} onPress={abrirModalRecuperar}>
           <Text style={styles.linkRecuperarTexto}>Esqueci minha senha</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.linkCadastro} onPress={abrirModalCadastro}>
+          <Text style={styles.linkCadastroTexto}>
+            Não tem conta? <Text style={styles.linkCadastroDestaque}>Criar conta</Text>
+          </Text>
+        </TouchableOpacity>
       </View>
 
       {/* ── Modal: Esqueci minha senha ── */}
@@ -151,6 +207,77 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
                 {enviandoRecuperar
                   ? <ActivityIndicator color={Colors.textDark} />
                   : <Text style={styles.botaoSalvarTexto}>Enviar</Text>
+                }
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* ── Modal: Criar conta ── */}
+      <Modal visible={modalCadastro} transparent animationType="fade">
+        <View style={styles.overlay}>
+          <View style={styles.modal}>
+            <Text style={styles.modalTitulo}>Criar conta</Text>
+            <Text style={styles.modalSubtitulo}>
+              Após cadastrar, aguarde a ativação pelo administrador.
+            </Text>
+
+            {erroCadastro ? <Text style={styles.msgErro}>{erroCadastro}</Text> : null}
+            {sucessoCadastro ? <Text style={styles.msgSucesso}>{sucessoCadastro}</Text> : null}
+
+            <Text style={styles.label}>Nome</Text>
+            <TextInput
+              style={styles.input}
+              value={novoNome}
+              onChangeText={setNovoNome}
+              placeholder="Nome completo"
+              placeholderTextColor={Colors.textSecondary}
+            />
+
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              value={novoEmail}
+              onChangeText={setNovoEmail}
+              placeholder="seu@selgron.com.br"
+              placeholderTextColor={Colors.textSecondary}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+
+            <Text style={styles.label}>Senha</Text>
+            <TextInput
+              style={styles.input}
+              value={novaSenha}
+              onChangeText={setNovaSenha}
+              placeholder="Mínimo 6 caracteres"
+              placeholderTextColor={Colors.textSecondary}
+              secureTextEntry
+            />
+
+            <Text style={styles.label}>Confirmar senha</Text>
+            <TextInput
+              style={styles.input}
+              value={confirmSenha}
+              onChangeText={setConfirmSenha}
+              placeholder="••••••"
+              placeholderTextColor={Colors.textSecondary}
+              secureTextEntry
+            />
+
+            <View style={styles.modalBotoes}>
+              <TouchableOpacity style={styles.botaoCancelar} onPress={() => setModalCadastro(false)}>
+                <Text style={styles.botaoCancelarTexto}>Fechar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.botaoSalvar}
+                onPress={enviarCadastro}
+                disabled={enviandoCadastro}
+              >
+                {enviandoCadastro
+                  ? <ActivityIndicator color={Colors.textDark} />
+                  : <Text style={styles.botaoSalvarTexto}>Cadastrar</Text>
                 }
               </TouchableOpacity>
             </View>
@@ -240,6 +367,19 @@ const styles = StyleSheet.create({
   linkRecuperarTexto: {
     color: Colors.primary,
     fontSize: 13,
+    textDecorationLine: 'underline',
+  },
+  linkCadastro: {
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  linkCadastroTexto: {
+    color: Colors.textSecondary,
+    fontSize: 13,
+  },
+  linkCadastroDestaque: {
+    color: Colors.primary,
+    fontWeight: 'bold',
     textDecorationLine: 'underline',
   },
   overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.6)', justifyContent: 'center', padding: 24 },

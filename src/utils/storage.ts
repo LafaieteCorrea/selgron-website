@@ -96,9 +96,9 @@ export function getUsuarioLogado(): Usuario | null {
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
-export async function login(email: string, senha: string): Promise<Usuario | null> {
+export async function login(email: string, senha: string): Promise<{ usuario: Usuario | null; erro?: string }> {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha });
-  if (error || !data.user) return null;
+  if (error || !data.user) return { usuario: null, erro: 'Email ou senha incorretos.' };
 
   const { data: perfil } = await supabase
     .from('profiles')
@@ -106,7 +106,12 @@ export async function login(email: string, senha: string): Promise<Usuario | nul
     .eq('id', data.user.id)
     .single();
 
-  if (!perfil) return null;
+  if (!perfil) return { usuario: null, erro: 'Perfil não encontrado.' };
+
+  if (perfil.ativo === false) {
+    await supabase.auth.signOut();
+    return { usuario: null, erro: 'Conta aguardando ativação pelo administrador.' };
+  }
 
   const usuario: Usuario = {
     id: data.user.id,
@@ -115,7 +120,29 @@ export async function login(email: string, senha: string): Promise<Usuario | nul
     perfil: perfil.perfil,
   };
   setUsuarioAtual(usuario);
-  return usuario;
+  return { usuario };
+}
+
+export async function cadastrarUsuario(nome: string, email: string, senha: string): Promise<string | null> {
+  if (!nome || !email || !senha) return 'Preencha todos os campos.';
+  if (senha.length < 6) return 'A senha deve ter pelo menos 6 caracteres.';
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password: senha,
+    options: { data: { nome, perfil: 'tecnico' } },
+  });
+  if (error) return error.message;
+  if (!data.user) return 'Falha ao cadastrar usuário.';
+
+  const { error: perfilError } = await supabase
+    .from('profiles')
+    .upsert({ id: data.user.id, nome, perfil: 'tecnico', ativo: false }, { onConflict: 'id' });
+
+  await supabase.auth.signOut();
+
+  if (perfilError) return perfilError.message;
+  return null;
 }
 
 export async function logout(): Promise<void> {
