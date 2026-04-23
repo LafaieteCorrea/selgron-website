@@ -123,6 +123,17 @@ export async function logout(): Promise<void> {
   setUsuarioAtual(null);
 }
 
+export async function pedirRecuperacaoSenha(email: string): Promise<string | null> {
+  const redirectTo = typeof window !== 'undefined' ? window.location.origin : undefined;
+  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
+  return error ? error.message : null;
+}
+
+export async function redefinirSenha(novaSenha: string): Promise<string | null> {
+  const { error } = await supabase.auth.updateUser({ password: novaSenha });
+  return error ? error.message : null;
+}
+
 // ─── Reembolso ────────────────────────────────────────────────────────────────
 
 export async function salvarRelatorio(r: RelatorioReembolso): Promise<void> {
@@ -268,19 +279,28 @@ export async function getUsuarios(): Promise<(Usuario & { ativo: boolean })[]> {
 }
 
 export async function criarUsuario(nome: string, email: string, senha: string, perfil: string): Promise<string | null> {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password: senha,
-    options: { data: { nome, perfil } },
-  });
-  if (error) return error.message;
-  if (data.user) {
-    const { error: perfilError } = await supabase
-      .from('profiles')
-      .upsert({ id: data.user.id, nome, perfil }, { onConflict: 'id' });
-    if (perfilError) return perfilError.message;
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return 'Sessão expirada. Faça login novamente.';
+    const url = `${process.env.EXPO_PUBLIC_SUPABASE_URL}/functions/v1/admin-create-user`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({ nome, email, senha, perfil }),
+    });
+    const text = await res.text();
+    try {
+      const json = JSON.parse(text);
+      return json.error ?? null;
+    } catch {
+      return res.ok ? null : `Erro ${res.status}: Edge Function não encontrada. Deploy a função no Supabase.`;
+    }
+  } catch (e: any) {
+    return `Erro de conexão: ${e?.message ?? String(e)}`;
   }
-  return null;
 }
 
 export async function atualizarPerfil(id: string, campos: { nome?: string; perfil?: string; ativo?: boolean }): Promise<void> {
