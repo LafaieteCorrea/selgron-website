@@ -163,8 +163,8 @@ export async function redefinirSenha(novaSenha: string): Promise<string | null> 
 
 // ─── Reembolso ────────────────────────────────────────────────────────────────
 
-export async function salvarRelatorio(r: RelatorioReembolso): Promise<void> {
-  await supabase.from('relatorios_reembolso').upsert({
+export async function salvarRelatorio(r: RelatorioReembolso): Promise<string | null> {
+  const { error } = await supabase.from('relatorios_reembolso').upsert({
     id: r.id,
     usuario_id: r.usuarioId,
     tecnico: r.tecnico,
@@ -176,6 +176,11 @@ export async function salvarRelatorio(r: RelatorioReembolso): Promise<void> {
     gerado: r.gerado,
     updated_at: new Date().toISOString(),
   });
+  if (error) {
+    console.error('[salvarRelatorio] erro:', error);
+    return error.message;
+  }
+  return null;
 }
 
 export async function getRelatorios(usuarioId: string): Promise<RelatorioReembolso[]> {
