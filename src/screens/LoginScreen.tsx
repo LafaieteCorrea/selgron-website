@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity, StyleSheet,
-  ActivityIndicator, KeyboardAvoidingView, Platform, Image,
+  ActivityIndicator, KeyboardAvoidingView, Platform, Image, Modal,
 } from 'react-native';
 import { Colors } from '../theme/colors';
 
@@ -10,6 +10,13 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
   const [senha, setSenha] = useState('');
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState('');
+
+  // Modal recuperação de senha
+  const [modalRecuperar, setModalRecuperar] = useState(false);
+  const [emailRecuperar, setEmailRecuperar] = useState('');
+  const [enviandoRecuperar, setEnviandoRecuperar] = useState(false);
+  const [erroRecuperar, setErroRecuperar] = useState('');
+  const [sucessoRecuperar, setSucessoRecuperar] = useState('');
 
   async function handleLogin() {
     if (!email || !senha) {
@@ -25,6 +32,31 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
       onLogin();
     } else {
       setErro('Email ou senha incorretos.');
+    }
+  }
+
+  function abrirModalRecuperar() {
+    setEmailRecuperar(email);
+    setErroRecuperar('');
+    setSucessoRecuperar('');
+    setModalRecuperar(true);
+  }
+
+  async function enviarRecuperacao() {
+    if (!emailRecuperar) {
+      setErroRecuperar('Informe seu email.');
+      return;
+    }
+    setErroRecuperar('');
+    setSucessoRecuperar('');
+    setEnviandoRecuperar(true);
+    const { pedirRecuperacaoSenha } = require('../utils/storage');
+    const err = await pedirRecuperacaoSenha(emailRecuperar.trim().toLowerCase());
+    setEnviandoRecuperar(false);
+    if (err) {
+      setErroRecuperar(err);
+    } else {
+      setSucessoRecuperar('Enviamos um link de recuperação para seu email. Verifique sua caixa de entrada.');
     }
   }
 
@@ -78,7 +110,53 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
             : <Text style={styles.botaoTexto}>Entrar</Text>
           }
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.linkRecuperar} onPress={abrirModalRecuperar}>
+          <Text style={styles.linkRecuperarTexto}>Esqueci minha senha</Text>
+        </TouchableOpacity>
       </View>
+
+      {/* ── Modal: Esqueci minha senha ── */}
+      <Modal visible={modalRecuperar} transparent animationType="fade">
+        <View style={styles.overlay}>
+          <View style={styles.modal}>
+            <Text style={styles.modalTitulo}>Recuperar senha</Text>
+            <Text style={styles.modalSubtitulo}>
+              Informe seu email e enviaremos um link para redefinir a senha.
+            </Text>
+
+            {erroRecuperar ? <Text style={styles.msgErro}>{erroRecuperar}</Text> : null}
+            {sucessoRecuperar ? <Text style={styles.msgSucesso}>{sucessoRecuperar}</Text> : null}
+
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              value={emailRecuperar}
+              onChangeText={setEmailRecuperar}
+              placeholder="seu@selgron.com.br"
+              placeholderTextColor={Colors.textSecondary}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+
+            <View style={styles.modalBotoes}>
+              <TouchableOpacity style={styles.botaoCancelar} onPress={() => setModalRecuperar(false)}>
+                <Text style={styles.botaoCancelarTexto}>Fechar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.botaoSalvar}
+                onPress={enviarRecuperacao}
+                disabled={enviandoRecuperar}
+              >
+                {enviandoRecuperar
+                  ? <ActivityIndicator color={Colors.textDark} />
+                  : <Text style={styles.botaoSalvarTexto}>Enviar</Text>
+                }
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 }
@@ -154,5 +232,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#2d1010',
     padding: 10,
     borderRadius: 8,
+  },
+  linkRecuperar: {
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  linkRecuperarTexto: {
+    color: Colors.primary,
+    fontSize: 13,
+    textDecorationLine: 'underline',
+  },
+  overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.6)', justifyContent: 'center', padding: 24 },
+  modal: { backgroundColor: Colors.card, borderRadius: 16, padding: 24, borderWidth: 1, borderColor: Colors.border },
+  modalTitulo: { color: Colors.text, fontSize: 18, fontWeight: 'bold', marginBottom: 4 },
+  modalSubtitulo: { color: Colors.textSecondary, fontSize: 13, marginBottom: 16 },
+  modalBotoes: { flexDirection: 'row', gap: 12, marginTop: 8 },
+  botaoCancelar: {
+    flex: 1, padding: 12, borderRadius: 8,
+    borderWidth: 1, borderColor: Colors.border, alignItems: 'center',
+  },
+  botaoCancelarTexto: { color: Colors.textSecondary, fontWeight: 'bold' },
+  botaoSalvar: {
+    flex: 1, padding: 12, borderRadius: 8,
+    backgroundColor: Colors.primary, alignItems: 'center',
+  },
+  botaoSalvarTexto: { color: Colors.textDark, fontWeight: 'bold' },
+  msgErro: {
+    color: '#ff6b6b', backgroundColor: '#2d1010',
+    padding: 10, borderRadius: 8, marginBottom: 12, fontSize: 13,
+  },
+  msgSucesso: {
+    color: '#6bff9e', backgroundColor: '#0d2d1a',
+    padding: 10, borderRadius: 8, marginBottom: 12, fontSize: 13,
   },
 });

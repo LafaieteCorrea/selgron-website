@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View, ActivityIndicator } from 'react-native';
 import LoginScreen from './src/screens/LoginScreen';
+import ResetPasswordScreen from './src/screens/ResetPasswordScreen';
 import AppNavigator from './src/navigation/AppNavigator';
 import { Colors } from './src/theme/colors';
 import { supabase } from './src/utils/supabase';
@@ -11,6 +12,7 @@ import { setUsuarioAtual } from './src/utils/storage';
 
 export default function App() {
   const [logado, setLogado] = useState(false);
+  const [recuperandoSenha, setRecuperandoSenha] = useState(false);
   const [inicializando, setInicializando] = useState(true);
 
   useEffect(() => {
@@ -36,8 +38,12 @@ export default function App() {
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      // Ignora TOKEN_REFRESHED e PASSWORD_RECOVERY para não interferir com re-auth de troca de senha
-      if (event === 'TOKEN_REFRESHED' || event === 'PASSWORD_RECOVERY') return;
+      if (event === 'TOKEN_REFRESHED') return;
+      if (event === 'PASSWORD_RECOVERY') {
+        setRecuperandoSenha(true);
+        setLogado(false);
+        return;
+      }
       if (session?.user) {
         const { data: perfil } = await supabase
           .from('profiles')
@@ -66,7 +72,9 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: Colors.background }}>
       <StatusBar style="light" backgroundColor={Colors.background} />
-      {logado ? (
+      {recuperandoSenha ? (
+        <ResetPasswordScreen onDone={() => setRecuperandoSenha(false)} />
+      ) : logado ? (
         <NavigationContainer>
           <AppNavigator onLogout={() => setLogado(false)} />
         </NavigationContainer>
