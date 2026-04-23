@@ -1,0 +1,352 @@
+import { supabase } from './supabase';
+
+export interface Usuario {
+  id: string;
+  nome: string;
+  email: string;
+  perfil: 'tecnico' | 'gestor' | 'admin';
+}
+
+export type TipoNota = 'Combustível' | 'Hospedagem' | 'Alimentação' | 'Pedágio' | 'Outros';
+
+export interface NotaReembolso {
+  id: string;
+  tipo: TipoNota;
+  valor: string;
+  descricao: string;
+  fotoUri: string;
+  fotoBase64: string;
+  extraviada: boolean;
+  dataHora: string;
+}
+
+export interface RelatorioReembolso {
+  id: string;
+  tecnico: string;
+  clientes: string;
+  acompanhantes: string;
+  periodo: string;
+  observacoes: string;
+  notas: NotaReembolso[];
+  dataCriacao: string;
+  gerado: boolean;
+  usuarioId: string;
+}
+
+export type MotivoVisita =
+  | 'Assistência Técnica'
+  | 'Manutenção'
+  | 'Instalação'
+  | 'Demonstração'
+  | 'Treinamento';
+
+export interface DiaHoras {
+  id: string;
+  data: string;
+  horaInicioDeslocamento: string;
+  horaFimDeslocamento: string;
+  horaInicioAtendimento: string;
+  horaFimAtendimento: string;
+}
+
+export interface PecaOS {
+  id: string;
+  descricao: string;
+  codigo: string;
+  quantidade: string;
+  valorUnitario: string;
+}
+
+export interface OrdemServico {
+  id: string;
+  numeroOS: string;
+  dataAbertura: string;
+  cidade: string;
+  cliente: string;
+  contato: string;
+  chassi: string;
+  modelo: string;
+  emGarantia: boolean;
+  fimGarantia: string;
+  motivoVisita: MotivoVisita;
+  kmRodados: string;
+  diasHoras: DiaHoras[];
+  descricaoServico: string;
+  fotosAtendimento: { id: string; uri: string; base64: string }[];
+  pecas: PecaOS[];
+  assinaturaTecnico: string;
+  assinaturaCliente: string;
+  dataAssinatura: string;
+  tecnico: string;
+  usuarioId: string;
+  gerada: boolean;
+}
+
+// ─── Estado do usuário logado (sincronizado pelo App.tsx) ─────────────────────
+
+let usuarioAtual: Usuario | null = null;
+
+export function setUsuarioAtual(u: Usuario | null) {
+  usuarioAtual = u;
+}
+
+export function getUsuarioLogado(): Usuario | null {
+  return usuarioAtual;
+}
+
+// ─── Auth ─────────────────────────────────────────────────────────────────────
+
+export async function login(email: string, senha: string): Promise<Usuario | null> {
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha });
+  if (error || !data.user) return null;
+
+  const { data: perfil } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', data.user.id)
+    .single();
+
+  if (!perfil) return null;
+
+  const usuario: Usuario = {
+    id: data.user.id,
+    nome: perfil.nome,
+    email: data.user.email!,
+    perfil: perfil.perfil,
+  };
+  setUsuarioAtual(usuario);
+  return usuario;
+}
+
+export async function logout(): Promise<void> {
+  await supabase.auth.signOut();
+  setUsuarioAtual(null);
+}
+
+// ─── Reembolso ────────────────────────────────────────────────────────────────
+
+export async function salvarRelatorio(r: RelatorioReembolso): Promise<void> {
+  await supabase.from('relatorios_reembolso').upsert({
+    id: r.id,
+    usuario_id: r.usuarioId,
+    tecnico: r.tecnico,
+    clientes: r.clientes,
+    acompanhantes: r.acompanhantes,
+    periodo: r.periodo,
+    observacoes: r.observacoes,
+    notas: r.notas,
+    gerado: r.gerado,
+    updated_at: new Date().toISOString(),
+  });
+}
+
+export async function getRelatorios(usuarioId: string): Promise<RelatorioReembolso[]> {
+  const u = getUsuarioLogado();
+  let query = supabase.from('relatorios_reembolso').select('*').order('created_at', { ascending: false });
+
+  if (u?.perfil === 'tecnico') query = query.eq('usuario_id', usuarioId);
+
+  const { data } = await query;
+  return (data || []).map(dbToRelatorio);
+}
+
+export async function getRelatorioById(id: string): Promise<RelatorioReembolso | null> {
+  const { data } = await supabase.from('relatorios_reembolso').select('*').eq('id', id).single();
+  return data ? dbToRelatorio(data) : null;
+}
+
+export async function getTodosRelatorios(): Promise<RelatorioReembolso[]> {
+  const { data } = await supabase
+    .from('relatorios_reembolso')
+    .select('*')
+    .order('created_at', { ascending: false });
+  return (data || []).map(dbToRelatorio);
+}
+
+function dbToRelatorio(d: any): RelatorioReembolso {
+  return {
+    id: d.id,
+    usuarioId: d.usuario_id,
+    tecnico: d.tecnico,
+    clientes: d.clientes,
+    acompanhantes: d.acompanhantes,
+    periodo: d.periodo,
+    observacoes: d.observacoes,
+    notas: d.notas || [],
+    dataCriacao: d.created_at,
+    gerado: d.gerado,
+  };
+}
+
+// ─── OS ───────────────────────────────────────────────────────────────────────
+
+export async function salvarOS(os: OrdemServico): Promise<void> {
+  await supabase.from('ordens_servico').upsert({
+    id: os.id,
+    numero_os: os.numeroOS,
+    data_abertura: os.dataAbertura,
+    usuario_id: os.usuarioId,
+    tecnico: os.tecnico,
+    cliente: os.cliente,
+    cidade: os.cidade,
+    contato: os.contato,
+    chassi: os.chassi,
+    modelo: os.modelo,
+    em_garantia: os.emGarantia,
+    fim_garantia: os.fimGarantia,
+    motivo_visita: os.motivoVisita,
+    km_rodados: os.kmRodados,
+    descricao_servico: os.descricaoServico,
+    dias_horas: os.diasHoras,
+    fotos_atendimento: os.fotosAtendimento,
+    pecas: os.pecas,
+    assinatura_tecnico: os.assinaturaTecnico,
+    assinatura_cliente: os.assinaturaCliente,
+    data_assinatura: os.dataAssinatura,
+    gerada: os.gerada,
+    updated_at: new Date().toISOString(),
+  });
+}
+
+export async function getOrdens(usuarioId: string): Promise<OrdemServico[]> {
+  const u = getUsuarioLogado();
+  let query = supabase.from('ordens_servico').select('*').order('created_at', { ascending: false });
+
+  if (u?.perfil === 'tecnico') query = query.eq('usuario_id', usuarioId);
+
+  const { data } = await query;
+  return (data || []).map(dbToOS);
+}
+
+export async function getOSById(id: string): Promise<OrdemServico | null> {
+  const { data } = await supabase.from('ordens_servico').select('*').eq('id', id).single();
+  return data ? dbToOS(data) : null;
+}
+
+export async function getTodasOS(): Promise<OrdemServico[]> {
+  const { data } = await supabase
+    .from('ordens_servico')
+    .select('*')
+    .order('created_at', { ascending: false });
+  return (data || []).map(dbToOS);
+}
+
+function dbToOS(d: any): OrdemServico {
+  return {
+    id: d.id,
+    numeroOS: d.numero_os,
+    dataAbertura: d.data_abertura,
+    usuarioId: d.usuario_id,
+    tecnico: d.tecnico,
+    cliente: d.cliente,
+    cidade: d.cidade,
+    contato: d.contato,
+    chassi: d.chassi,
+    modelo: d.modelo,
+    emGarantia: d.em_garantia,
+    fimGarantia: d.fim_garantia,
+    motivoVisita: d.motivo_visita,
+    kmRodados: d.km_rodados,
+    descricaoServico: d.descricao_servico,
+    diasHoras: d.dias_horas || [],
+    fotosAtendimento: d.fotos_atendimento || [],
+    pecas: d.pecas || [],
+    assinaturaTecnico: d.assinatura_tecnico,
+    assinaturaCliente: d.assinatura_cliente,
+    dataAssinatura: d.data_assinatura,
+    gerada: d.gerada,
+  };
+}
+
+// ─── Admin: Usuários ──────────────────────────────────────────────────────────
+
+export async function getUsuarios(): Promise<(Usuario & { ativo: boolean })[]> {
+  const { data } = await supabase.from('profiles').select('*').order('nome');
+  return (data || []).map(d => ({
+    id: d.id, nome: d.nome, email: '', perfil: d.perfil, ativo: d.ativo,
+  }));
+}
+
+export async function criarUsuario(nome: string, email: string, senha: string, perfil: string): Promise<string | null> {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password: senha,
+    options: { data: { nome, perfil } },
+  });
+  if (error) return error.message;
+  if (data.user) {
+    const { error: perfilError } = await supabase
+      .from('profiles')
+      .upsert({ id: data.user.id, nome, perfil }, { onConflict: 'id' });
+    if (perfilError) return perfilError.message;
+  }
+  return null;
+}
+
+export async function atualizarPerfil(id: string, campos: { nome?: string; perfil?: string; ativo?: boolean }): Promise<void> {
+  await supabase.from('profiles').update(campos).eq('id', id);
+}
+
+export async function deletarUsuario(id: string): Promise<string | null> {
+  const { error } = await supabase.from('profiles').delete().eq('id', id);
+  return error ? error.message : null;
+}
+
+export async function alterarSenhaPropria(senhaAntiga: string, novaSenha: string): Promise<string | null> {
+  const u = getUsuarioLogado();
+  if (!u) return 'Não autenticado.';
+  const { error: reAuthError } = await supabase.auth.signInWithPassword({
+    email: u.email,
+    password: senhaAntiga,
+  });
+  if (reAuthError) return 'Senha atual incorreta.';
+  const { error } = await supabase.auth.updateUser({ password: novaSenha });
+  return error ? error.message : null;
+}
+
+export async function adminAlterarSenha(userId: string, novaSenha: string): Promise<string | null> {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return 'Sessão expirada. Faça login novamente.';
+    const url = `${process.env.EXPO_PUBLIC_SUPABASE_URL}/functions/v1/admin-reset-password`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({ userId, novaSenha }),
+    });
+    const text = await res.text();
+    try {
+      const json = JSON.parse(text);
+      return json.error ?? null;
+    } catch {
+      return res.ok ? null : `Erro ${res.status}: Edge Function não encontrada. Deploy a função no Supabase.`;
+    }
+  } catch (e: any) {
+    return `Erro de conexão: ${e?.message ?? String(e)}`;
+  }
+}
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+export function gerarId(): string {
+  return Date.now().toString() + Math.random().toString(36).slice(2, 7);
+}
+
+export function gerarNumeroOS(): string {
+  return Math.floor(30000 + Math.random() * 10000).toString();
+}
+
+export function calcularTotalPecas(pecas: PecaOS[]): number {
+  return pecas.reduce((acc, p) => {
+    const qty = parseFloat(p.quantidade.replace(',', '.')) || 0;
+    const vl  = parseFloat(p.valorUnitario.replace(',', '.')) || 0;
+    return acc + qty * vl;
+  }, 0);
+}
+
+export function calcularTotalNotas(notas: NotaReembolso[]): number {
+  return notas.reduce((acc, n) => acc + (parseFloat(n.valor.replace(',', '.')) || 0), 0);
+}
