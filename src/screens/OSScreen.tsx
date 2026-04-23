@@ -406,17 +406,27 @@ export default function OSScreen() {
             keyExtractor={i => i.id}
             contentContainerStyle={{ padding: 16 }}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.osCard} onPress={() => { setOS(item); setTela('verOS'); }}>
-                <View style={styles.rowBetween}>
-                  <Text style={styles.osNumero}>OS #{item.numeroOS}</Text>
-                  <View style={[styles.badge, item.gerada ? styles.badgeVerde : styles.badgeAmarelo]}>
-                    <Text style={styles.badgeTexto}>{item.gerada ? 'Concluída' : 'Rascunho'}</Text>
+              <View style={styles.osRow}>
+                <TouchableOpacity
+                  style={styles.osCardFlex}
+                  onPress={() => { setOS(item); setTela('verOS'); }}
+                >
+                  <View style={styles.rowBetween}>
+                    <Text style={styles.osNumero}>OS #{item.numeroOS}</Text>
+                    <View style={[styles.badge, item.gerada ? styles.badgeVerde : styles.badgeAmarelo]}>
+                      <Text style={styles.badgeTexto}>{item.gerada ? 'Concluída' : 'Rascunho'}</Text>
+                    </View>
                   </View>
-                </View>
-                <Text style={styles.osCliente}>{item.cliente}</Text>
-                <Text style={styles.osDetalhe}>{item.modelo} {item.chassi ? `· Chassi ${item.chassi}` : ''}</Text>
-                <Text style={styles.osDetalhe}>{item.motivoVisita} · {item.dataAbertura}</Text>
-              </TouchableOpacity>
+                  <Text style={styles.osCliente}>{item.cliente}</Text>
+                  <Text style={styles.osDetalhe}>{item.modelo} {item.chassi ? `· Chassi ${item.chassi}` : ''}</Text>
+                  <Text style={styles.osDetalhe}>{item.motivoVisita} · {item.dataAbertura}</Text>
+                </TouchableOpacity>
+                {item.gerada && (
+                  <TouchableOpacity style={styles.pdfSideBtn} onPress={() => gerarPDF(item)}>
+                    <Text style={styles.pdfSideTexto}>📄{'\n'}PDF</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
             )}
           />
         )}
@@ -723,6 +733,10 @@ const styles = StyleSheet.create({
   vazio: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   textoVazio: { color: Colors.textSecondary, fontSize: 13, textAlign: 'center', marginBottom: 12 },
   osCard: { backgroundColor: Colors.card, borderRadius: 12, padding: 16, marginBottom: 12, borderWidth: 1, borderColor: Colors.border },
+  osRow: { flexDirection: 'row', gap: 8, marginBottom: 12 },
+  osCardFlex: { flex: 1, backgroundColor: Colors.card, borderRadius: 12, padding: 16, borderWidth: 1, borderColor: Colors.border },
+  pdfSideBtn: { width: 70, borderRadius: 12, borderWidth: 1, borderColor: Colors.primary, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2A1E00' },
+  pdfSideTexto: { color: Colors.primary, fontWeight: 'bold', fontSize: 12, textAlign: 'center' },
   osNumero: { color: Colors.primary, fontWeight: 'bold', fontSize: 14 },
   osCliente: { color: Colors.text, fontWeight: 'bold', fontSize: 15, marginTop: 4 },
   osDetalhe: { color: Colors.textSecondary, fontSize: 12, marginTop: 2 },
