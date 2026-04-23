@@ -6,6 +6,7 @@ import {
 import { showAlert } from '../utils/alert';
 import SignaturePad, { SignaturePadRef } from '../components/SignaturePad';
 import * as ImagePicker from 'expo-image-picker';
+import * as ImageManipulator from 'expo-image-manipulator';
 import DatePicker from '../components/DatePicker';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
@@ -142,12 +143,25 @@ export default function OSScreen() {
 
   // ─── Fotos do Atendimento ────────────────────────────────────────────────────
 
+  // Reduz a imagem para no máximo ~900px de largura + compressão JPEG 0.5.
+  // Essencial para não estourar limite de payload do Supabase ao salvar.
+  async function comprimirImagem(uri: string): Promise<{ uri: string; base64: string }> {
+    const manipulated = await ImageManipulator.manipulateAsync(
+      uri,
+      [{ resize: { width: 900 } }],
+      { compress: 0.5, format: ImageManipulator.SaveFormat.JPEG, base64: true }
+    );
+    const base64 = manipulated.base64 ? `data:image/jpeg;base64,${manipulated.base64}` : '';
+    return { uri: manipulated.uri, base64 };
+  }
+
   async function tirarFotoAtendimento() {
     const perm = await ImagePicker.requestCameraPermissionsAsync();
     if (!perm.granted) { showAlert('Permissão necessária', 'Precisamos da câmera.'); return; }
-    const res = await ImagePicker.launchCameraAsync({ quality: 0.5, base64: true });
+    const res = await ImagePicker.launchCameraAsync({ quality: 0.5 });
     if (!res.canceled && os) {
-      const foto = { id: gerarId(), uri: res.assets[0].uri, base64: res.assets[0].base64 ? `data:image/jpeg;base64,${res.assets[0].base64}` : '' };
+      const { uri, base64 } = await comprimirImagem(res.assets[0].uri);
+      const foto = { id: gerarId(), uri, base64 };
       atualizar({ fotosAtendimento: [...os.fotosAtendimento, foto] });
     }
   }
@@ -156,17 +170,15 @@ export default function OSScreen() {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!perm.granted) { showAlert('Permissão necessária', 'Precisamos acessar a galeria.'); return; }
     const res = await ImagePicker.launchImageLibraryAsync({
-      quality: 0.5, base64: true,
+      quality: 0.5,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsMultipleSelection: true,
     });
     if (!res.canceled && os) {
-      const novas = res.assets.map(asset => {
-        let b64 = '';
-        if (asset.base64) b64 = `data:image/jpeg;base64,${asset.base64}`;
-        else if (asset.uri.startsWith('data:')) b64 = asset.uri;
-        return { id: gerarId(), uri: asset.uri, base64: b64 };
-      });
+      const novas = await Promise.all(res.assets.map(async asset => {
+        const { uri, base64 } = await comprimirImagem(asset.uri);
+        return { id: gerarId(), uri, base64 };
+      }));
       atualizar({ fotosAtendimento: [...os.fotosAtendimento, ...novas] });
     }
   }
