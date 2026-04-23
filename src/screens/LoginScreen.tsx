@@ -220,7 +220,7 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
           <View style={styles.modal}>
             <Text style={styles.modalTitulo}>Criar conta</Text>
             <Text style={styles.modalSubtitulo}>
-              Após cadastrar, aguarde a ativação pelo administrador.
+              Apenas emails @selgron.com.br. Após cadastrar, aguarde a ativação pelo administrador.
             </Text>
 
             {erroCadastro ? <Text style={styles.msgErro}>{erroCadastro}</Text> : null}

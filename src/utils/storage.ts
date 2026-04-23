@@ -123,12 +123,19 @@ export async function login(email: string, senha: string): Promise<{ usuario: Us
   return { usuario };
 }
 
+export const DOMINIO_EMAIL_PERMITIDO = 'selgron.com.br';
+
 export async function cadastrarUsuario(nome: string, email: string, senha: string): Promise<string | null> {
   if (!nome || !email || !senha) return 'Preencha todos os campos.';
   if (senha.length < 6) return 'A senha deve ter pelo menos 6 caracteres.';
 
+  const emailNorm = email.trim().toLowerCase();
+  if (!emailNorm.endsWith(`@${DOMINIO_EMAIL_PERMITIDO}`)) {
+    return `Apenas emails @${DOMINIO_EMAIL_PERMITIDO} são permitidos.`;
+  }
+
   const { data, error } = await supabase.auth.signUp({
-    email,
+    email: emailNorm,
     password: senha,
     options: { data: { nome, perfil: 'tecnico' } },
   });
