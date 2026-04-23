@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
   ScrollView, Alert, FlatList, Switch, Modal, Platform,
 } from 'react-native';
+import { showAlert } from '../utils/alert';
 import SignaturePad, { SignaturePadRef } from '../components/SignaturePad';
 import * as ImagePicker from 'expo-image-picker';
 import DatePicker from '../components/DatePicker';
@@ -46,6 +47,7 @@ export default function OSScreen() {
   const [os, setOS] = useState<OrdemServico | null>(null);
   const [assinandoTecnico, setAssinandoTecnico] = useState(true);
   const [camposInvalidos, setCamposInvalidos] = useState<Set<string>>(new Set());
+  const [salvandoOS, setSalvandoOS] = useState(false);
   const sigRef = useRef<SignaturePadRef>(null);
 
   function limparInvalido(campo: string) {
@@ -134,7 +136,7 @@ export default function OSScreen() {
 
   async function tirarFotoAtendimento() {
     const perm = await ImagePicker.requestCameraPermissionsAsync();
-    if (!perm.granted) { Alert.alert('Permissão necessária', 'Precisamos da câmera.'); return; }
+    if (!perm.granted) { showAlert('Permissão necessária', 'Precisamos da câmera.'); return; }
     const res = await ImagePicker.launchCameraAsync({ quality: 0.5, base64: true });
     if (!res.canceled && os) {
       const foto = { id: gerarId(), uri: res.assets[0].uri, base64: res.assets[0].base64 ? `data:image/jpeg;base64,${res.assets[0].base64}` : '' };
@@ -144,7 +146,7 @@ export default function OSScreen() {
 
   async function escolherFotoGaleria() {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) { Alert.alert('Permissão necessária', 'Precisamos acessar a galeria.'); return; }
+    if (!perm.granted) { showAlert('Permissão necessária', 'Precisamos acessar a galeria.'); return; }
     const res = await ImagePicker.launchImageLibraryAsync({
       quality: 0.5, base64: true,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -191,7 +193,13 @@ export default function OSScreen() {
       const dataAssinatura = new Date().toLocaleString('pt-BR');
       const osAtualizada = { ...os, assinaturaCliente: sig, dataAssinatura, gerada: true };
       setOS(osAtualizada);
-      await salvarOS(osAtualizada);
+      setSalvandoOS(true);
+      const erro = await salvarOS(osAtualizada);
+      setSalvandoOS(false);
+      if (erro) {
+        showAlert('Erro ao salvar OS', erro);
+        return;
+      }
       setTela('verOS');
       gerarPDF(osAtualizada);
     }
@@ -635,11 +643,20 @@ export default function OSScreen() {
             <Text style={styles.botaoTexto}>PRÓXIMO →</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={styles.botao} onPress={async () => {
-            await salvarOS(os);
-            abrirAssinatura();
-          }}>
-            <Text style={styles.botaoTexto}>IR PARA ASSINATURAS ✍</Text>
+          <TouchableOpacity
+            style={[styles.botao, salvandoOS && { opacity: 0.6 }]}
+            disabled={salvandoOS}
+            onPress={async () => {
+              setSalvandoOS(true);
+              const erro = await salvarOS(os);
+              setSalvandoOS(false);
+              if (erro) {
+                showAlert('Erro ao salvar OS', erro);
+                return;
+              }
+              abrirAssinatura();
+            }}>
+            <Text style={styles.botaoTexto}>{salvandoOS ? 'SALVANDO...' : 'IR PARA ASSINATURAS ✍'}</Text>
           </TouchableOpacity>
         )}
         {etapa !== 'identificacao' && (

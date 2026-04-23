@@ -223,8 +223,8 @@ function dbToRelatorio(d: any): RelatorioReembolso {
 
 // ─── OS ───────────────────────────────────────────────────────────────────────
 
-export async function salvarOS(os: OrdemServico): Promise<void> {
-  await supabase.from('ordens_servico').upsert({
+export async function salvarOS(os: OrdemServico): Promise<string | null> {
+  const { error } = await supabase.from('ordens_servico').upsert({
     id: os.id,
     numero_os: os.numeroOS,
     data_abertura: os.dataAbertura,
@@ -249,6 +249,11 @@ export async function salvarOS(os: OrdemServico): Promise<void> {
     gerada: os.gerada,
     updated_at: new Date().toISOString(),
   });
+  if (error) {
+    console.error('[salvarOS] erro:', error);
+    return error.message;
+  }
+  return null;
 }
 
 export async function getOrdens(usuarioId: string): Promise<OrdemServico[]> {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
-  ScrollView, Alert, Image, FlatList, Switch, Platform,
+  ScrollView, Image, FlatList, Switch, Platform,
 } from 'react-native';
+import { showAlert } from '../utils/alert';
 import * as ImagePicker from 'expo-image-picker';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
@@ -111,7 +112,7 @@ async function abrirPDF(r: RelatorioReembolso): Promise<void> {
     // Abre o popup SINCRONAMENTE pra não perder o user-gesture context.
     const w = window.open('', '_blank');
     if (!w) {
-      Alert.alert('Popup bloqueado', 'Libere popups para este site e tente novamente.');
+      showAlert('Popup bloqueado', 'Libere popups para este site e tente novamente.');
       return;
     }
     w.document.write(html);
@@ -159,7 +160,7 @@ export default function ReembolsoScreen() {
 
   async function criarRelatorio() {
     if (!clientes || !dataInicio || !dataFim) {
-      Alert.alert('Atenção', 'Preencha o cliente, a data de início e a data de fim.');
+      showAlert('Atenção', 'Preencha o cliente, a data de início e a data de fim.');
       return;
     }
     const usuario = getUsuarioLogado();
@@ -178,7 +179,7 @@ export default function ReembolsoScreen() {
     };
     const erro = await salvarRelatorio(novo);
     if (erro) {
-      Alert.alert('Erro ao salvar', erro);
+      showAlert('Erro ao salvar', erro);
       return;
     }
     setRelatorioAtual(novo);
@@ -198,7 +199,7 @@ export default function ReembolsoScreen() {
 
   async function tirarFoto() {
     const perm = await ImagePicker.requestCameraPermissionsAsync();
-    if (!perm.granted) { Alert.alert('Permissão necessária', 'Precisamos da câmera.'); return; }
+    if (!perm.granted) { showAlert('Permissão necessária', 'Precisamos da câmera.'); return; }
     const res = await ImagePicker.launchCameraAsync({ quality: 0.5, base64: true });
     if (!res.canceled) {
       setFotoUri(res.assets[0].uri);
@@ -208,7 +209,7 @@ export default function ReembolsoScreen() {
 
   async function escolherDaGaleria() {
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) { Alert.alert('Permissão necessária', 'Precisamos acessar a galeria.'); return; }
+    if (!perm.granted) { showAlert('Permissão necessária', 'Precisamos acessar a galeria.'); return; }
     const res = await ImagePicker.launchImageLibraryAsync({ quality: 0.5, base64: true, mediaTypes: ImagePicker.MediaTypeOptions.Images });
     if (!res.canceled) {
       const asset = res.assets[0];
@@ -229,8 +230,8 @@ export default function ReembolsoScreen() {
   }
 
   async function adicionarNota() {
-    if (!valor) { Alert.alert('Atenção', 'Informe o valor.'); return; }
-    if (!extraviada && !fotoUri) { Alert.alert('Atenção', 'Tire a foto ou marque como extraviada.'); return; }
+    if (!valor) { showAlert('Atenção', 'Informe o valor.'); return; }
+    if (!extraviada && !fotoUri) { showAlert('Atenção', 'Tire a foto ou marque como extraviada.'); return; }
     if (!relatorioAtual) return;
 
     const nota: NotaReembolso = {
@@ -244,7 +245,7 @@ export default function ReembolsoScreen() {
     const atualizado = { ...relatorioAtual, notas: [...relatorioAtual.notas, nota] };
     const erro = await salvarRelatorio(atualizado);
     if (erro) {
-      Alert.alert('Erro ao salvar despesa', erro);
+      showAlert('Erro ao salvar despesa', erro);
       return;
     }
     setRelatorioAtual(atualizado);
@@ -255,7 +256,7 @@ export default function ReembolsoScreen() {
   async function gerarPDF(rel?: RelatorioReembolso) {
     const alvo = rel ?? relatorioAtual;
     if (!alvo || alvo.notas.length === 0) {
-      Alert.alert('Atenção', 'Adicione pelo menos uma despesa.');
+      showAlert('Atenção', 'Adicione pelo menos uma despesa.');
       return;
     }
 
@@ -264,7 +265,7 @@ export default function ReembolsoScreen() {
     if (Platform.OS === 'web') {
       winWeb = window.open('', '_blank');
       if (!winWeb) {
-        Alert.alert('Popup bloqueado', 'Libere popups para este site e tente novamente.');
+        showAlert('Popup bloqueado', 'Libere popups para este site e tente novamente.');
         return;
       }
     }
@@ -482,8 +483,11 @@ export default function ReembolsoScreen() {
           keyExtractor={i => i.id}
           contentContainerStyle={{ padding: 16 }}
           renderItem={({ item }) => (
-            <View style={styles.relatorioCard}>
-              <TouchableOpacity onPress={() => { setRelatorioAtual(item); setTela('verRelatorio'); }}>
+            <View style={styles.relatorioRow}>
+              <TouchableOpacity
+                style={styles.relatorioCardFlex}
+                onPress={() => { setRelatorioAtual(item); setTela('verRelatorio'); }}
+              >
                 <View style={styles.rowBetween}>
                   <Text style={styles.relatorioCliente}>{item.clientes}</Text>
                   <View style={[styles.badge, item.gerado ? styles.badgeVerde : styles.badgeAmarelo]}>
@@ -494,8 +498,8 @@ export default function ReembolsoScreen() {
                 <Text style={styles.relatorioSub}>{item.notas.length} despesa(s) · R$ {calcularTotalNotas(item.notas).toFixed(2)}</Text>
               </TouchableOpacity>
               {item.gerado && (
-                <TouchableOpacity style={styles.pdfIconBtn} onPress={() => gerarPDF(item)}>
-                  <Text style={styles.pdfIconTexto}>📄 Abrir PDF</Text>
+                <TouchableOpacity style={styles.pdfSideBtn} onPress={() => gerarPDF(item)}>
+                  <Text style={styles.pdfSideTexto}>📄{'\n'}PDF</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -565,6 +569,8 @@ const styles = StyleSheet.create({
   badgeVerde: { backgroundColor: '#1A3A1A' },
   badgeAmarelo: { backgroundColor: '#3A2A00' },
   badgeTexto: { fontSize: 11, fontWeight: 'bold', color: Colors.text },
-  pdfIconBtn: { marginTop: 10, padding: 10, borderRadius: 6, borderWidth: 1, borderColor: Colors.primary, alignItems: 'center', backgroundColor: '#2A1E00' },
-  pdfIconTexto: { color: Colors.primary, fontWeight: 'bold', fontSize: 13 },
+  relatorioRow: { flexDirection: 'row', gap: 8, marginBottom: 12 },
+  relatorioCardFlex: { flex: 1, backgroundColor: Colors.card, borderRadius: 10, padding: 16, borderWidth: 1, borderColor: Colors.border },
+  pdfSideBtn: { width: 70, borderRadius: 10, borderWidth: 1, borderColor: Colors.primary, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2A1E00' },
+  pdfSideTexto: { color: Colors.primary, fontWeight: 'bold', fontSize: 12, textAlign: 'center' },
 });
