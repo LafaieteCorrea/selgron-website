@@ -134,21 +134,14 @@ export async function cadastrarUsuario(nome: string, email: string, senha: strin
     return `Apenas emails @${DOMINIO_EMAIL_PERMITIDO} são permitidos.`;
   }
 
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email: emailNorm,
     password: senha,
     options: { data: { nome, perfil: 'tecnico' } },
   });
   if (error) return error.message;
-  if (!data.user) return 'Falha ao cadastrar usuário.';
-
-  const { error: perfilError } = await supabase
-    .from('profiles')
-    .upsert({ id: data.user.id, nome, perfil: 'tecnico', ativo: false }, { onConflict: 'id' });
 
   await supabase.auth.signOut();
-
-  if (perfilError) return perfilError.message;
   return null;
 }
 
