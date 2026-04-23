@@ -43,10 +43,15 @@ export type MotivoVisita =
 export interface DiaHoras {
   id: string;
   data: string;
-  horaInicioDeslocamento: string;
-  horaFimDeslocamento: string;
-  horaInicioAtendimento: string;
-  horaFimAtendimento: string;
+  // Horas de viagem
+  horaInicioViagem: string;
+  horaFimViagem: string;
+  // Horas trabalhadas — manhã
+  horaInicioManha: string;
+  horaFimManha: string;
+  // Horas trabalhadas — tarde
+  horaInicioTarde: string;
+  horaFimTarde: string;
 }
 
 export interface PecaOS {
@@ -55,25 +60,60 @@ export interface PecaOS {
   codigo: string;
   quantidade: string;
   valorUnitario: string;
+  ipi: string;
 }
 
 export interface OrdemServico {
   id: string;
   numeroOS: string;
   dataAbertura: string;
-  cidade: string;
+  // Identificação
+  codigo: string;
   cliente: string;
   contato: string;
+  cidade: string;
+  uf: string;
+  pais: string;
+  // Equipamento
   chassi: string;
   modelo: string;
   emGarantia: boolean;
   fimGarantia: string;
   motivoVisita: MotivoVisita;
-  kmRodados: string;
+  // KMs (sumário da viagem)
+  kmViagem: string;
+  kmCliente: string;
+  kmSelgron: string;
+  kmTrabalho: string;
+  kmValorUnitario: string;
   diasHoras: DiaHoras[];
+  // Serviço
   descricaoServico: string;
   fotosAtendimento: { id: string; uri: string; base64: string }[];
+  // Peças
   pecas: PecaOS[];
+  // Totais financeiros (categoria: quantidade + valor unitário + valor cliente + valor selgron)
+  horasAcompanhamentoQtd: string;
+  horasAcompanhamentoValor: string;
+  horasAcompanhamentoCliente: string;
+  horasAcompanhamentoSelgron: string;
+  diariasQtd: string;
+  diariasValor: string;
+  diariasCliente: string;
+  diariasSelgron: string;
+  kmOutrosQtd: string;
+  kmOutrosValor: string;
+  kmOutrosCliente: string;
+  kmOutrosSelgron: string;
+  horasTrabalhadasQtd: string;
+  horasTrabalhadasValor: string;
+  horasTrabalhadasCliente: string;
+  horasTrabalhadasSelgron: string;
+  valorAPagarTecnico: string;
+  // Nota fiscal
+  notaFiscalProforma: string;
+  dataEmissao: string;
+  // Assinatura e meta
   assinaturaTecnico: string;
   assinaturaCliente: string;
   dataAssinatura: string;
@@ -230,19 +270,45 @@ export async function salvarOS(os: OrdemServico): Promise<string | null> {
     data_abertura: os.dataAbertura,
     usuario_id: os.usuarioId,
     tecnico: os.tecnico,
+    codigo: os.codigo,
     cliente: os.cliente,
-    cidade: os.cidade,
     contato: os.contato,
+    cidade: os.cidade,
+    uf: os.uf,
+    pais: os.pais,
     chassi: os.chassi,
     modelo: os.modelo,
     em_garantia: os.emGarantia,
     fim_garantia: os.fimGarantia,
     motivo_visita: os.motivoVisita,
-    km_rodados: os.kmRodados,
+    km_viagem: os.kmViagem,
+    km_cliente: os.kmCliente,
+    km_selgron: os.kmSelgron,
+    km_trabalho: os.kmTrabalho,
+    km_valor_unitario: os.kmValorUnitario,
     descricao_servico: os.descricaoServico,
     dias_horas: os.diasHoras,
     fotos_atendimento: os.fotosAtendimento,
     pecas: os.pecas,
+    horas_acompanhamento_qtd: os.horasAcompanhamentoQtd,
+    horas_acompanhamento_valor: os.horasAcompanhamentoValor,
+    horas_acompanhamento_cliente: os.horasAcompanhamentoCliente,
+    horas_acompanhamento_selgron: os.horasAcompanhamentoSelgron,
+    diarias_qtd: os.diariasQtd,
+    diarias_valor: os.diariasValor,
+    diarias_cliente: os.diariasCliente,
+    diarias_selgron: os.diariasSelgron,
+    km_outros_qtd: os.kmOutrosQtd,
+    km_outros_valor: os.kmOutrosValor,
+    km_outros_cliente: os.kmOutrosCliente,
+    km_outros_selgron: os.kmOutrosSelgron,
+    horas_trabalhadas_qtd: os.horasTrabalhadasQtd,
+    horas_trabalhadas_valor: os.horasTrabalhadasValor,
+    horas_trabalhadas_cliente: os.horasTrabalhadasCliente,
+    horas_trabalhadas_selgron: os.horasTrabalhadasSelgron,
+    valor_a_pagar_tecnico: os.valorAPagarTecnico,
+    nota_fiscal_proforma: os.notaFiscalProforma,
+    data_emissao: os.dataEmissao,
     assinatura_tecnico: os.assinaturaTecnico,
     assinatura_cliente: os.assinaturaCliente,
     data_assinatura: os.dataAssinatura,
@@ -286,23 +352,49 @@ function dbToOS(d: any): OrdemServico {
     dataAbertura: d.data_abertura,
     usuarioId: d.usuario_id,
     tecnico: d.tecnico,
-    cliente: d.cliente,
-    cidade: d.cidade,
-    contato: d.contato,
-    chassi: d.chassi,
-    modelo: d.modelo,
-    emGarantia: d.em_garantia,
-    fimGarantia: d.fim_garantia,
+    codigo: d.codigo || '',
+    cliente: d.cliente || '',
+    contato: d.contato || '',
+    cidade: d.cidade || '',
+    uf: d.uf || '',
+    pais: d.pais || '',
+    chassi: d.chassi || '',
+    modelo: d.modelo || '',
+    emGarantia: !!d.em_garantia,
+    fimGarantia: d.fim_garantia || '',
     motivoVisita: d.motivo_visita,
-    kmRodados: d.km_rodados,
-    descricaoServico: d.descricao_servico,
+    kmViagem: d.km_viagem || '',
+    kmCliente: d.km_cliente || '',
+    kmSelgron: d.km_selgron || '',
+    kmTrabalho: d.km_trabalho || '',
+    kmValorUnitario: d.km_valor_unitario || '',
+    descricaoServico: d.descricao_servico || '',
     diasHoras: d.dias_horas || [],
     fotosAtendimento: d.fotos_atendimento || [],
     pecas: d.pecas || [],
-    assinaturaTecnico: d.assinatura_tecnico,
-    assinaturaCliente: d.assinatura_cliente,
-    dataAssinatura: d.data_assinatura,
-    gerada: d.gerada,
+    horasAcompanhamentoQtd: d.horas_acompanhamento_qtd || '',
+    horasAcompanhamentoValor: d.horas_acompanhamento_valor || '',
+    horasAcompanhamentoCliente: d.horas_acompanhamento_cliente || '',
+    horasAcompanhamentoSelgron: d.horas_acompanhamento_selgron || '',
+    diariasQtd: d.diarias_qtd || '',
+    diariasValor: d.diarias_valor || '',
+    diariasCliente: d.diarias_cliente || '',
+    diariasSelgron: d.diarias_selgron || '',
+    kmOutrosQtd: d.km_outros_qtd || '',
+    kmOutrosValor: d.km_outros_valor || '',
+    kmOutrosCliente: d.km_outros_cliente || '',
+    kmOutrosSelgron: d.km_outros_selgron || '',
+    horasTrabalhadasQtd: d.horas_trabalhadas_qtd || '',
+    horasTrabalhadasValor: d.horas_trabalhadas_valor || '',
+    horasTrabalhadasCliente: d.horas_trabalhadas_cliente || '',
+    horasTrabalhadasSelgron: d.horas_trabalhadas_selgron || '',
+    valorAPagarTecnico: d.valor_a_pagar_tecnico || '',
+    notaFiscalProforma: d.nota_fiscal_proforma || '',
+    dataEmissao: d.data_emissao || '',
+    assinaturaTecnico: d.assinatura_tecnico || '',
+    assinaturaCliente: d.assinatura_cliente || '',
+    dataAssinatura: d.data_assinatura || '',
+    gerada: !!d.gerada,
   };
 }
 

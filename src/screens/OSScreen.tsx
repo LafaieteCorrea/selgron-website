@@ -18,7 +18,7 @@ import {
 } from '../utils/storage';
 
 type Tela = 'lista' | 'novaOS' | 'assinatura' | 'verOS';
-type EtapaOS = 'identificacao' | 'maquina' | 'horas' | 'servico' | 'pecas';
+type EtapaOS = 'identificacao' | 'maquina' | 'horas' | 'servico' | 'pecas' | 'financeiro';
 
 const MOTIVOS: MotivoVisita[] = ['Assistência Técnica', 'Manutenção', 'Instalação', 'Demonstração', 'Treinamento'];
 
@@ -27,14 +27,21 @@ function osVazia(tecnico: string, usuarioId: string): OrdemServico {
     id: gerarId(),
     numeroOS: gerarNumeroOS(),
     dataAbertura: new Date().toLocaleDateString('pt-BR'),
-    cidade: '', cliente: '', contato: '',
+    codigo: '', cliente: '', contato: '',
+    cidade: '', uf: '', pais: 'Brasil',
     chassi: '', modelo: '', emGarantia: false, fimGarantia: '',
     motivoVisita: 'Assistência Técnica',
-    kmRodados: '',
+    kmViagem: '', kmCliente: '', kmSelgron: '', kmTrabalho: '', kmValorUnitario: '',
     diasHoras: [],
     descricaoServico: '',
     fotosAtendimento: [],
     pecas: [],
+    horasAcompanhamentoQtd: '', horasAcompanhamentoValor: '', horasAcompanhamentoCliente: '', horasAcompanhamentoSelgron: '',
+    diariasQtd: '', diariasValor: '', diariasCliente: '', diariasSelgron: '',
+    kmOutrosQtd: '', kmOutrosValor: '', kmOutrosCliente: '', kmOutrosSelgron: '',
+    horasTrabalhadasQtd: '', horasTrabalhadasValor: '', horasTrabalhadasCliente: '', horasTrabalhadasSelgron: '',
+    valorAPagarTecnico: '',
+    notaFiscalProforma: '', dataEmissao: '',
     assinaturaTecnico: '', assinaturaCliente: '', dataAssinatura: '',
     tecnico, usuarioId, gerada: false,
   };
@@ -98,8 +105,9 @@ export default function OSScreen() {
     if (!os) return;
     const novo: DiaHoras = {
       id: gerarId(), data: '',
-      horaInicioDeslocamento: '', horaFimDeslocamento: '',
-      horaInicioAtendimento: '', horaFimAtendimento: '',
+      horaInicioViagem: '', horaFimViagem: '',
+      horaInicioManha: '', horaFimManha: '',
+      horaInicioTarde: '', horaFimTarde: '',
     };
     atualizar({ diasHoras: [...os.diasHoras, novo] });
   }
@@ -118,7 +126,7 @@ export default function OSScreen() {
 
   function adicionarPeca() {
     if (!os) return;
-    const nova: PecaOS = { id: gerarId(), descricao: '', codigo: '', quantidade: '1', valorUnitario: '' };
+    const nova: PecaOS = { id: gerarId(), descricao: '', codigo: '', quantidade: '1', valorUnitario: '', ipi: '' };
     atualizar({ pecas: [...os.pecas, nova] });
   }
 
@@ -211,18 +219,32 @@ export default function OSScreen() {
     const dados = osFinal || os;
     if (!dados) return;
     const totalPecas = calcularTotalPecas(dados.pecas);
+    const parseNum = (s: string) => parseFloat(String(s || '').replace(',', '.')) || 0;
 
     const linhasDias = dados.diasHoras.map(d => `
       <tr>
         <td>${d.data}</td>
-        <td>${d.horaInicioDeslocamento}</td><td>${d.horaFimDeslocamento}</td>
-        <td>${d.horaInicioAtendimento}</td><td>${d.horaFimAtendimento}</td>
+        <td>${d.horaInicioViagem}</td><td>${d.horaFimViagem}</td>
+        <td>${d.horaInicioManha}</td><td>${d.horaFimManha}</td>
+        <td>${d.horaInicioTarde}</td><td>${d.horaFimTarde}</td>
       </tr>`).join('');
 
     const linhasPecas = dados.pecas.map(p => {
-      const total = (parseFloat(p.quantidade) || 0) * (parseFloat(p.valorUnitario.replace(',', '.')) || 0);
-      return `<tr><td>${p.descricao}</td><td>${p.codigo}</td><td>${p.quantidade}</td><td>R$ ${parseFloat(p.valorUnitario.replace(',', '.')).toFixed(2)}</td><td>R$ ${total.toFixed(2)}</td></tr>`;
+      const total = parseNum(p.quantidade) * parseNum(p.valorUnitario);
+      return `<tr><td>${p.quantidade}</td><td>${p.codigo}</td><td>${p.descricao}</td><td>R$ ${parseNum(p.valorUnitario).toFixed(2)}</td><td>${p.ipi || '-'}</td><td>R$ ${total.toFixed(2)}</td></tr>`;
     }).join('');
+
+    const linhaFin = (label: string, qtd: string, vu: string, cli: string, sel: string) => `
+      <tr>
+        <td>${label}</td>
+        <td>${qtd || '-'}</td>
+        <td>${vu ? 'R$ ' + parseNum(vu).toFixed(2) : '-'}</td>
+        <td>${cli ? 'R$ ' + parseNum(cli).toFixed(2) : '-'}</td>
+        <td>${sel ? 'R$ ' + parseNum(sel).toFixed(2) : '-'}</td>
+      </tr>`;
+
+    const totalCliente = parseNum(dados.horasTrabalhadasCliente) + parseNum(dados.horasAcompanhamentoCliente) + parseNum(dados.diariasCliente) + parseNum(dados.kmOutrosCliente) + totalPecas;
+    const totalSelgron = parseNum(dados.horasTrabalhadasSelgron) + parseNum(dados.horasAcompanhamentoSelgron) + parseNum(dados.diariasSelgron) + parseNum(dados.kmOutrosSelgron);
 
     const html = `
     <html><head><meta charset="UTF-8">
@@ -246,48 +268,95 @@ export default function OSScreen() {
       .garantia{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold}
       .g-sim{background:#fff3cd;color:#856404}
       .g-nao{background:#f5f5f5;color:#666}
+      .total-row td{font-weight:bold;background:#fff8e6}
     </style></head><body>
     <h1>SELGRON — Ordem de Serviço</h1>
     <h2>N° ${dados.numeroOS} | Aberta em ${dados.dataAbertura}</h2>
 
     <div class="sec">IDENTIFICAÇÃO</div>
     <div class="grid">
+      <div class="col"><div class="lb">CÓDIGO</div><div class="vl">${dados.codigo || '-'}</div></div>
       <div class="col"><div class="lb">CLIENTE</div><div class="vl">${dados.cliente}</div></div>
       <div class="col"><div class="lb">CONTATO</div><div class="vl">${dados.contato || '-'}</div></div>
     </div>
     <div class="grid">
       <div class="col"><div class="lb">CIDADE</div><div class="vl">${dados.cidade}</div></div>
+      <div class="col"><div class="lb">UF</div><div class="vl">${dados.uf || '-'}</div></div>
+      <div class="col"><div class="lb">PAÍS</div><div class="vl">${dados.pais || '-'}</div></div>
       <div class="col"><div class="lb">TÉCNICO</div><div class="vl">${dados.tecnico}</div></div>
     </div>
 
-    <div class="sec">MÁQUINA</div>
+    <div class="sec">EQUIPAMENTO</div>
     <div class="grid">
       <div class="col"><div class="lb">MODELO</div><div class="vl">${dados.modelo}</div></div>
       <div class="col"><div class="lb">CHASSI</div><div class="vl">${dados.chassi}</div></div>
     </div>
     <div class="grid">
       <div class="col"><div class="lb">GARANTIA</div><div class="vl"><span class="garantia ${dados.emGarantia ? 'g-sim' : 'g-nao'}">${dados.emGarantia ? `Em garantia até ${dados.fimGarantia}` : 'Fora de garantia'}</span></div></div>
-      <div class="col"><div class="lb">MOTIVO</div><div class="vl">${dados.motivoVisita}</div></div>
+      <div class="col"><div class="lb">MOTIVO INTERVENÇÃO</div><div class="vl">${dados.motivoVisita}</div></div>
     </div>
-    ${dados.kmRodados ? `<div class="lb">KM RODADOS</div><div class="vl">${dados.kmRodados} km</div>` : ''}
 
-    <div class="sec">HORAS TRABALHADAS</div>
+    <div class="sec">KM DA VIAGEM</div>
     <table>
-      <tr><th>Data</th><th>Início Desl.</th><th>Fim Desl.</th><th>Início Atend.</th><th>Fim Atend.</th></tr>
+      <tr><th>KM Viagem</th><th>KM até Cliente</th><th>KM até Selgron</th><th>KM Trabalho</th><th>Valor Unitário</th></tr>
+      <tr>
+        <td>${dados.kmViagem || '-'}</td>
+        <td>${dados.kmCliente || '-'}</td>
+        <td>${dados.kmSelgron || '-'}</td>
+        <td>${dados.kmTrabalho || '-'}</td>
+        <td>${dados.kmValorUnitario ? 'R$ ' + parseNum(dados.kmValorUnitario).toFixed(2) : '-'}</td>
+      </tr>
+    </table>
+
+    <div class="sec">HORAS DE VIAGEM E TRABALHADAS</div>
+    <table>
+      <tr>
+        <th rowspan="2">Data</th>
+        <th colspan="2" style="text-align:center">Viagem</th>
+        <th colspan="2" style="text-align:center">Manhã</th>
+        <th colspan="2" style="text-align:center">Tarde</th>
+      </tr>
+      <tr>
+        <th>Início</th><th>Fim</th>
+        <th>Início</th><th>Fim</th>
+        <th>Início</th><th>Fim</th>
+      </tr>
       ${linhasDias}
     </table>
 
-    <div class="sec">DESCRIÇÃO DO SERVIÇO</div>
+    <div class="sec">DESCRIÇÃO DO SERVIÇO / PROVIDÊNCIAS</div>
     <div class="vl" style="white-space:pre-wrap">${dados.descricaoServico}</div>
 
     ${dados.pecas.length > 0 ? `
     <div class="sec">PEÇAS / MATERIAIS</div>
     <table>
-      <tr><th>Descrição</th><th>Código</th><th>Qtd</th><th>Vr Un</th><th>Total</th></tr>
+      <tr><th>Quant.</th><th>Código</th><th>Descrição</th><th>Valor Unit.</th><th>IPI %</th><th>Total</th></tr>
       ${linhasPecas}
     </table>
-    <div style="text-align:right;font-weight:bold;font-size:13px">Total Peças: R$ ${totalPecas.toFixed(2)}</div>
+    <div style="text-align:right;font-weight:bold;font-size:13px">Valor Total das Peças: R$ ${totalPecas.toFixed(2)}</div>
     ` : ''}
+
+    <div class="sec">TOTAIS FINANCEIROS</div>
+    <table>
+      <tr><th>Categoria</th><th>Quant.</th><th>Valor Unit.</th><th>Cliente</th><th>SELGRON</th></tr>
+      ${linhaFin('Horas Trabalhadas', dados.horasTrabalhadasQtd, dados.horasTrabalhadasValor, dados.horasTrabalhadasCliente, dados.horasTrabalhadasSelgron)}
+      ${linhaFin('Horas Acompanhamento', dados.horasAcompanhamentoQtd, dados.horasAcompanhamentoValor, dados.horasAcompanhamentoCliente, dados.horasAcompanhamentoSelgron)}
+      ${linhaFin('Diárias', dados.diariasQtd, dados.diariasValor, dados.diariasCliente, dados.diariasSelgron)}
+      ${linhaFin('Km / Outros', dados.kmOutrosQtd, dados.kmOutrosValor, dados.kmOutrosCliente, dados.kmOutrosSelgron)}
+      <tr class="total-row">
+        <td colspan="3">TOTAL</td>
+        <td>R$ ${totalCliente.toFixed(2)}</td>
+        <td>R$ ${totalSelgron.toFixed(2)}</td>
+      </tr>
+    </table>
+
+    <div class="grid" style="margin-top:12px">
+      <div class="col"><div class="lb">VALOR A SER PAGO AO ASSISTENTE TÉCNICO</div><div class="vl">${dados.valorAPagarTecnico ? 'R$ ' + parseNum(dados.valorAPagarTecnico).toFixed(2) : '-'}</div></div>
+    </div>
+    <div class="grid">
+      <div class="col"><div class="lb">NOTA FISCAL / PROFORMA Nº</div><div class="vl">${dados.notaFiscalProforma || '-'}</div></div>
+      <div class="col"><div class="lb">DATA DE EMISSÃO</div><div class="vl">${dados.dataEmissao || '-'}</div></div>
+    </div>
 
     ${dados.fotosAtendimento.length > 0 ? `
     <div class="sec">FOTOS DO ATENDIMENTO</div>
@@ -308,7 +377,7 @@ export default function OSScreen() {
       </div>
       <div class="sig-box">
         ${dados.assinaturaCliente ? `<img class="sig-img" src="${dados.assinaturaCliente}"/>` : '<div style="height:60px"></div>'}
-        <div class="sig-lb">Cliente: ${dados.cliente}</div>
+        <div class="sig-lb">Carimbo / Assinatura Cliente: ${dados.cliente}</div>
         <div class="sig-lb">${dados.dataAssinatura}</div>
       </div>
     </div>
@@ -469,7 +538,7 @@ export default function OSScreen() {
     <View style={styles.container}>
       {/* Indicador de etapa */}
       <View style={styles.etapasRow}>
-        {(['identificacao', 'maquina', 'horas', 'servico', 'pecas'] as EtapaOS[]).map((e, i) => (
+        {(['identificacao', 'maquina', 'horas', 'servico', 'pecas', 'financeiro'] as EtapaOS[]).map((e, i) => (
           <View key={e} style={[styles.etapaDot, etapa === e && styles.etapaDotAtivo]} />
         ))}
       </View>
@@ -479,16 +548,26 @@ export default function OSScreen() {
         {etapa === 'identificacao' && (
           <>
             <Text style={styles.tituloPagina}>IDENTIFICAÇÃO</Text>
+            <Text style={styles.label}>Código</Text>
+            <TextInput style={styles.input} placeholder="Código do cliente" placeholderTextColor={Colors.textSecondary} value={os.codigo} onChangeText={v => atualizar({ codigo: v })} />
             <Text style={styles.label}>Cliente *</Text>
             <TextInput style={[styles.input, camposInvalidos.has('cliente') && styles.inputError]} placeholder="Nome do cliente" placeholderTextColor={Colors.textSecondary} value={os.cliente} onChangeText={v => { atualizar({ cliente: v }); limparInvalido('cliente'); }} />
             {camposInvalidos.has('cliente') && <Text style={styles.erroTexto}>Campo obrigatório</Text>}
             <Text style={styles.label}>Contato</Text>
             <TextInput style={styles.input} placeholder="Nome do contato no cliente" placeholderTextColor={Colors.textSecondary} value={os.contato} onChangeText={v => atualizar({ contato: v })} />
-            <Text style={styles.label}>Cidade / Local *</Text>
+            <Text style={styles.label}>Cidade *</Text>
             <TextInput style={[styles.input, camposInvalidos.has('cidade') && styles.inputError]} placeholder="Cidade de atendimento" placeholderTextColor={Colors.textSecondary} value={os.cidade} onChangeText={v => { atualizar({ cidade: v }); limparInvalido('cidade'); }} />
             {camposInvalidos.has('cidade') && <Text style={styles.erroTexto}>Campo obrigatório</Text>}
-            <Text style={styles.label}>KM Rodados</Text>
-            <TextInput style={styles.input} placeholder="Ex: 350" placeholderTextColor={Colors.textSecondary} value={os.kmRodados} onChangeText={v => atualizar({ kmRodados: v })} keyboardType="numeric" />
+            <View style={styles.row2col}>
+              <View style={styles.col}>
+                <Text style={styles.label}>UF</Text>
+                <TextInput style={styles.input} placeholder="Ex: SC" placeholderTextColor={Colors.textSecondary} value={os.uf} onChangeText={v => atualizar({ uf: v })} maxLength={2} autoCapitalize="characters" />
+              </View>
+              <View style={styles.col}>
+                <Text style={styles.label}>País</Text>
+                <TextInput style={styles.input} placeholder="Brasil" placeholderTextColor={Colors.textSecondary} value={os.pais} onChangeText={v => atualizar({ pais: v })} />
+              </View>
+            </View>
           </>
         )}
 
@@ -524,7 +603,33 @@ export default function OSScreen() {
 
         {etapa === 'horas' && (
           <>
-            <Text style={styles.tituloPagina}>HORAS TRABALHADAS</Text>
+            <Text style={styles.tituloPagina}>KM / HORAS</Text>
+
+            <Text style={styles.subsecaoTitulo}>KM da Viagem</Text>
+            <View style={styles.row2col}>
+              <View style={styles.col}>
+                <Text style={styles.label}>KM Viagem</Text>
+                <TextInput style={styles.input} placeholder="0" placeholderTextColor={Colors.textSecondary} value={os.kmViagem} onChangeText={v => atualizar({ kmViagem: v })} keyboardType="numeric" />
+              </View>
+              <View style={styles.col}>
+                <Text style={styles.label}>KM até Cliente</Text>
+                <TextInput style={styles.input} placeholder="0" placeholderTextColor={Colors.textSecondary} value={os.kmCliente} onChangeText={v => atualizar({ kmCliente: v })} keyboardType="numeric" />
+              </View>
+            </View>
+            <View style={styles.row2col}>
+              <View style={styles.col}>
+                <Text style={styles.label}>KM até Selgron</Text>
+                <TextInput style={styles.input} placeholder="0" placeholderTextColor={Colors.textSecondary} value={os.kmSelgron} onChangeText={v => atualizar({ kmSelgron: v })} keyboardType="numeric" />
+              </View>
+              <View style={styles.col}>
+                <Text style={styles.label}>KM Trabalho</Text>
+                <TextInput style={styles.input} placeholder="0" placeholderTextColor={Colors.textSecondary} value={os.kmTrabalho} onChangeText={v => atualizar({ kmTrabalho: v })} keyboardType="numeric" />
+              </View>
+            </View>
+            <Text style={styles.label}>Valor Unitário (R$/km)</Text>
+            <TextInput style={styles.input} placeholder="0,00" placeholderTextColor={Colors.textSecondary} value={os.kmValorUnitario} onChangeText={v => atualizar({ kmValorUnitario: v })} keyboardType="numeric" />
+
+            <Text style={[styles.subsecaoTitulo, { marginTop: 24 }]}>Dias de Atendimento</Text>
             {os.diasHoras.map((d, i) => (
               <View key={d.id} style={styles.diaCard}>
                 <View style={styles.rowBetween}>
@@ -538,24 +643,31 @@ export default function OSScreen() {
                   value={d.data ? new Date(d.data.split('/').reverse().join('-')) : null}
                   onChange={date => atualizarDia(d.id, { data: date.toLocaleDateString('pt-BR') })}
                 />
+                <Text style={[styles.label, { marginTop: 12 }]}>Horas de Viagem</Text>
                 <View style={styles.row2col}>
                   <View style={styles.col}>
-                    <Text style={styles.label}>Início Deslocamento</Text>
-                    <TextInput style={styles.input} placeholder="08:00" placeholderTextColor={Colors.textSecondary} value={d.horaInicioDeslocamento} onChangeText={v => atualizarDia(d.id, { horaInicioDeslocamento: v })} />
+                    <TextInput style={styles.input} placeholder="Início 08:00" placeholderTextColor={Colors.textSecondary} value={d.horaInicioViagem} onChangeText={v => atualizarDia(d.id, { horaInicioViagem: v })} />
                   </View>
                   <View style={styles.col}>
-                    <Text style={styles.label}>Fim Deslocamento</Text>
-                    <TextInput style={styles.input} placeholder="10:00" placeholderTextColor={Colors.textSecondary} value={d.horaFimDeslocamento} onChangeText={v => atualizarDia(d.id, { horaFimDeslocamento: v })} />
+                    <TextInput style={styles.input} placeholder="Fim 09:30" placeholderTextColor={Colors.textSecondary} value={d.horaFimViagem} onChangeText={v => atualizarDia(d.id, { horaFimViagem: v })} />
                   </View>
                 </View>
+                <Text style={[styles.label, { marginTop: 8 }]}>Horas Trabalhadas — Manhã</Text>
                 <View style={styles.row2col}>
                   <View style={styles.col}>
-                    <Text style={styles.label}>Início Atendimento</Text>
-                    <TextInput style={styles.input} placeholder="10:00" placeholderTextColor={Colors.textSecondary} value={d.horaInicioAtendimento} onChangeText={v => atualizarDia(d.id, { horaInicioAtendimento: v })} />
+                    <TextInput style={styles.input} placeholder="Início 07:30" placeholderTextColor={Colors.textSecondary} value={d.horaInicioManha} onChangeText={v => atualizarDia(d.id, { horaInicioManha: v })} />
                   </View>
                   <View style={styles.col}>
-                    <Text style={styles.label}>Fim Atendimento</Text>
-                    <TextInput style={styles.input} placeholder="17:00" placeholderTextColor={Colors.textSecondary} value={d.horaFimAtendimento} onChangeText={v => atualizarDia(d.id, { horaFimAtendimento: v })} />
+                    <TextInput style={styles.input} placeholder="Fim 12:30" placeholderTextColor={Colors.textSecondary} value={d.horaFimManha} onChangeText={v => atualizarDia(d.id, { horaFimManha: v })} />
+                  </View>
+                </View>
+                <Text style={[styles.label, { marginTop: 8 }]}>Horas Trabalhadas — Tarde</Text>
+                <View style={styles.row2col}>
+                  <View style={styles.col}>
+                    <TextInput style={styles.input} placeholder="Início 13:30" placeholderTextColor={Colors.textSecondary} value={d.horaInicioTarde} onChangeText={v => atualizarDia(d.id, { horaInicioTarde: v })} />
+                  </View>
+                  <View style={styles.col}>
+                    <TextInput style={styles.input} placeholder="Fim 19:30" placeholderTextColor={Colors.textSecondary} value={d.horaFimTarde} onChangeText={v => atualizarDia(d.id, { horaFimTarde: v })} />
                   </View>
                 </View>
               </View>
@@ -626,7 +738,14 @@ export default function OSScreen() {
                     <TextInput style={styles.input} placeholder="Qtd" placeholderTextColor={Colors.textSecondary} value={p.quantidade} onChangeText={v => atualizarPeca(p.id, { quantidade: v })} keyboardType="numeric" />
                   </View>
                 </View>
-                <TextInput style={styles.input} placeholder="Valor unitário (R$)" placeholderTextColor={Colors.textSecondary} value={p.valorUnitario} onChangeText={v => atualizarPeca(p.id, { valorUnitario: v })} keyboardType="numeric" />
+                <View style={styles.row2col}>
+                  <View style={styles.col}>
+                    <TextInput style={styles.input} placeholder="Valor unitário (R$)" placeholderTextColor={Colors.textSecondary} value={p.valorUnitario} onChangeText={v => atualizarPeca(p.id, { valorUnitario: v })} keyboardType="numeric" />
+                  </View>
+                  <View style={styles.col}>
+                    <TextInput style={styles.input} placeholder="IPI %" placeholderTextColor={Colors.textSecondary} value={p.ipi} onChangeText={v => atualizarPeca(p.id, { ipi: v })} keyboardType="numeric" />
+                  </View>
+                </View>
               </View>
             ))}
             <TouchableOpacity style={styles.botaoAdicionar} onPress={adicionarPeca}>
@@ -640,14 +759,63 @@ export default function OSScreen() {
             )}
           </>
         )}
+
+        {etapa === 'financeiro' && (
+          <>
+            <Text style={styles.tituloPagina}>FINANCEIRO</Text>
+            <Text style={styles.textoVazio}>
+              Preencha a quantidade e valor unitário de cada categoria. As colunas Cliente e SELGRON separam o rateio.
+            </Text>
+
+            {([
+              { key: 'horasTrabalhadas', label: 'Horas Trabalhadas', qtdK: 'horasTrabalhadasQtd', valK: 'horasTrabalhadasValor', cliK: 'horasTrabalhadasCliente', selK: 'horasTrabalhadasSelgron' },
+              { key: 'horasAcompanhamento', label: 'Horas Acompanhamento', qtdK: 'horasAcompanhamentoQtd', valK: 'horasAcompanhamentoValor', cliK: 'horasAcompanhamentoCliente', selK: 'horasAcompanhamentoSelgron' },
+              { key: 'diarias', label: 'Diárias', qtdK: 'diariasQtd', valK: 'diariasValor', cliK: 'diariasCliente', selK: 'diariasSelgron' },
+              { key: 'kmOutros', label: 'Km / Outros', qtdK: 'kmOutrosQtd', valK: 'kmOutrosValor', cliK: 'kmOutrosCliente', selK: 'kmOutrosSelgron' },
+            ] as const).map(cat => (
+              <View key={cat.key} style={styles.finCard}>
+                <Text style={styles.diaTitulo}>{cat.label}</Text>
+                <View style={styles.row2col}>
+                  <View style={styles.col}>
+                    <Text style={styles.label}>Quantidade</Text>
+                    <TextInput style={styles.input} placeholder="0" placeholderTextColor={Colors.textSecondary} value={(os as any)[cat.qtdK]} onChangeText={v => atualizar({ [cat.qtdK]: v } as any)} keyboardType="numeric" />
+                  </View>
+                  <View style={styles.col}>
+                    <Text style={styles.label}>Valor Unit (R$)</Text>
+                    <TextInput style={styles.input} placeholder="0,00" placeholderTextColor={Colors.textSecondary} value={(os as any)[cat.valK]} onChangeText={v => atualizar({ [cat.valK]: v } as any)} keyboardType="numeric" />
+                  </View>
+                </View>
+                <View style={styles.row2col}>
+                  <View style={styles.col}>
+                    <Text style={styles.label}>Valor Cliente</Text>
+                    <TextInput style={styles.input} placeholder="0,00" placeholderTextColor={Colors.textSecondary} value={(os as any)[cat.cliK]} onChangeText={v => atualizar({ [cat.cliK]: v } as any)} keyboardType="numeric" />
+                  </View>
+                  <View style={styles.col}>
+                    <Text style={styles.label}>Valor SELGRON</Text>
+                    <TextInput style={styles.input} placeholder="0,00" placeholderTextColor={Colors.textSecondary} value={(os as any)[cat.selK]} onChangeText={v => atualizar({ [cat.selK]: v } as any)} keyboardType="numeric" />
+                  </View>
+                </View>
+              </View>
+            ))}
+
+            <Text style={styles.label}>Valor a ser pago ao Assistente Técnico (R$)</Text>
+            <TextInput style={styles.input} placeholder="0,00" placeholderTextColor={Colors.textSecondary} value={os.valorAPagarTecnico} onChangeText={v => atualizar({ valorAPagarTecnico: v })} keyboardType="numeric" />
+
+            <Text style={styles.label}>Nota Fiscal / Proforma Nº</Text>
+            <TextInput style={styles.input} placeholder="Ex: 12345" placeholderTextColor={Colors.textSecondary} value={os.notaFiscalProforma} onChangeText={v => atualizar({ notaFiscalProforma: v })} />
+
+            <Text style={styles.label}>Data de Emissão</Text>
+            <TextInput style={styles.input} placeholder="DD/MM/AAAA" placeholderTextColor={Colors.textSecondary} value={os.dataEmissao} onChangeText={v => atualizar({ dataEmissao: v })} />
+          </>
+        )}
       </ScrollView>
 
       {/* Botões de navegação entre etapas */}
       <View style={styles.rodape}>
-        {etapa !== 'pecas' ? (
+        {etapa !== 'financeiro' ? (
           <TouchableOpacity style={styles.botao} onPress={() => {
             if (!validarEtapa()) return;
-            const ordem: EtapaOS[] = ['identificacao', 'maquina', 'horas', 'servico', 'pecas'];
+            const ordem: EtapaOS[] = ['identificacao', 'maquina', 'horas', 'servico', 'pecas', 'financeiro'];
             setEtapa(ordem[ordem.indexOf(etapa) + 1]);
           }}>
             <Text style={styles.botaoTexto}>PRÓXIMO →</Text>
@@ -671,7 +839,7 @@ export default function OSScreen() {
         )}
         {etapa !== 'identificacao' && (
           <TouchableOpacity style={styles.botaoSecundario} onPress={() => {
-            const ordem: EtapaOS[] = ['identificacao', 'maquina', 'horas', 'servico', 'pecas'];
+            const ordem: EtapaOS[] = ['identificacao', 'maquina', 'horas', 'servico', 'pecas', 'financeiro'];
             setEtapa(ordem[ordem.indexOf(etapa) - 1]);
           }}>
             <Text style={styles.botaoSecundarioTexto}>← Voltar</Text>
@@ -721,6 +889,8 @@ const styles = StyleSheet.create({
   opcaoTextoAtivo: { color: Colors.primary, fontWeight: 'bold' },
   switchRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: Colors.card, padding: 12, borderRadius: 8, marginTop: 12, borderWidth: 1, borderColor: Colors.border },
   diaCard: { backgroundColor: Colors.card, borderRadius: 10, padding: 14, marginBottom: 12, borderWidth: 1, borderColor: Colors.border },
+  finCard: { backgroundColor: Colors.card, borderRadius: 10, padding: 14, marginBottom: 12, borderWidth: 1, borderColor: Colors.border },
+  subsecaoTitulo: { color: Colors.primary, fontWeight: 'bold', fontSize: 13, letterSpacing: 1, marginTop: 8, marginBottom: 4 },
   diaTitulo: { color: Colors.primary, fontWeight: 'bold', fontSize: 13 },
   pecaCard: { backgroundColor: Colors.card, borderRadius: 10, padding: 14, marginBottom: 12, borderWidth: 1, borderColor: Colors.border },
   row2col: { flexDirection: 'row', gap: 8 },
