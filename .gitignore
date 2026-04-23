@@ -41,3 +41,10 @@ yarn-error.*
 /ios
 /android
 *.pdf
+
+# Supabase CLI
+supabase/.temp/
+supabase/.branches/
+
+# Claude Code
+.claude/
