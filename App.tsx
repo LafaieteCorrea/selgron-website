@@ -16,48 +16,45 @@ export default function App() {
   const [inicializando, setInicializando] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setInicializando(false), 5000);
-
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      clearTimeout(timeout);
-      if (session?.user) {
-        const { data: perfil } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-        if (perfil) {
-          setUsuarioAtual({ id: session.user.id, nome: perfil.nome, email: session.user.email!, perfil: perfil.perfil });
-          setLogado(true);
-        }
-      }
-      setInicializando(false);
-    }).catch(() => {
-      clearTimeout(timeout);
-      setInicializando(false);
-    });
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'TOKEN_REFRESHED') return;
+
       if (event === 'PASSWORD_RECOVERY') {
         setRecuperandoSenha(true);
         setLogado(false);
+        setInicializando(false);
         return;
       }
-      if (session?.user) {
-        const { data: perfil } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-        if (perfil) {
-          setUsuarioAtual({ id: session.user.id, nome: perfil.nome, email: session.user.email!, perfil: perfil.perfil });
-          setLogado(true);
-        }
-      } else {
+
+      if (!session?.user) {
         setUsuarioAtual(null);
         setLogado(false);
+        setInicializando(false);
+        return;
       }
+
+      const { data: perfil } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single();
+
+      if (!perfil || perfil.ativo === false) {
+        await supabase.auth.signOut();
+        setUsuarioAtual(null);
+        setLogado(false);
+        setInicializando(false);
+        return;
+      }
+
+      setUsuarioAtual({
+        id: session.user.id,
+        nome: perfil.nome,
+        email: session.user.email!,
+        perfil: perfil.perfil,
+      });
+      setLogado(true);
+      setInicializando(false);
     });
 
     return () => subscription.unsubscribe();
