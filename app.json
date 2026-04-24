@@ -13,15 +13,28 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "br.com.selgron.fieldtech",
+      "infoPlist": {
+        "NSCameraUsageDescription": "A Selgron precisa da câmera para fotografar notas fiscais e atendimentos de Ordem de Serviço.",
+        "NSPhotoLibraryUsageDescription": "A Selgron precisa acessar sua galeria para anexar fotos em notas fiscais e OS.",
+        "NSPhotoLibraryAddUsageDescription": "A Selgron precisa salvar PDFs gerados na sua galeria."
+      }
     },
     "android": {
+      "package": "br.com.selgron.fieldtech",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_MEDIA_IMAGES"
+      ]
     },
     "web": {
       "favicon": "./assets/site-logo.png",
@@ -29,6 +42,19 @@
       "title": "Plataforma Interna - Selgron",
       "lang": "pt-BR"
     },
-    "plugins": []
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "A Selgron precisa acessar sua galeria para anexar fotos.",
+          "cameraPermission": "A Selgron precisa da câmera para fotografar notas e atendimentos."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": ""
+      }
+    }
   }
 }
