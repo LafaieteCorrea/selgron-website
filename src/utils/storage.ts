@@ -421,12 +421,16 @@ export async function criarUsuario(nome: string, email: string, senha: string, p
       body: JSON.stringify({ nome, email, senha, perfil }),
     });
     const text = await res.text();
-    try {
-      const json = JSON.parse(text);
-      return json.error ?? null;
-    } catch {
-      return res.ok ? null : `Erro ${res.status}: Edge Function não encontrada. Deploy a função no Supabase.`;
+    let json: any = null;
+    try { json = JSON.parse(text); } catch { /* não-JSON */ }
+
+    if (!res.ok) {
+      return json?.error ?? json?.message ?? json?.msg ?? `Erro ${res.status}: ${text.slice(0, 200) || 'Edge Function não respondeu. Faça deploy com: supabase functions deploy admin-create-user'}`;
     }
+    if (json?.error) return json.error;
+    // Resposta 2xx precisa confirmar que user foi criado
+    if (!json?.userId) return 'Resposta inesperada do servidor. A Edge Function pode não estar deployada.';
+    return null;
   } catch (e: any) {
     return `Erro de conexão: ${e?.message ?? String(e)}`;
   }
