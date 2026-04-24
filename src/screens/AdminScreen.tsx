@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { Colors } from '../theme/colors';
 import { OrdemServico, RelatorioReembolso, getTodasOS, getTodosRelatorios } from '../utils/storage';
+import { gerarPDFOS, gerarPDFReembolso } from '../utils/pdf';
 
 type Aba = 'os' | 'reembolso';
 
@@ -82,18 +83,25 @@ export default function AdminScreen() {
               <Text style={styles.vazio}>Nenhuma OS encontrada.</Text>
             ) : (
               ordensFiltradas.map(o => (
-                <View key={o.id} style={styles.card}>
-                  <View style={styles.cardHeader}>
-                    <Text style={styles.cardNumero}>OS #{o.numeroOS}</Text>
-                    <View style={[styles.badge, o.gerada ? styles.badgeOk : styles.badgePend]}>
-                      <Text style={styles.badgeTexto}>{o.gerada ? 'Gerada' : 'Em andamento'}</Text>
+                <View key={o.id} style={styles.row}>
+                  <View style={[styles.card, { flex: 1 }]}>
+                    <View style={styles.cardHeader}>
+                      <Text style={styles.cardNumero}>OS #{o.numeroOS}</Text>
+                      <View style={[styles.badge, o.gerada ? styles.badgeOk : styles.badgePend]}>
+                        <Text style={styles.badgeTexto}>{o.gerada ? 'Gerada' : 'Em andamento'}</Text>
+                      </View>
+                    </View>
+                    <Text style={styles.cardCliente}>{o.cliente} — {o.cidade}</Text>
+                    <View style={styles.cardMeta}>
+                      <Text style={styles.cardMetaTexto}>👤 {o.tecnico || '—'}</Text>
+                      <Text style={styles.cardMetaTexto}>📅 {o.dataAbertura}</Text>
                     </View>
                   </View>
-                  <Text style={styles.cardCliente}>{o.cliente} — {o.cidade}</Text>
-                  <View style={styles.cardMeta}>
-                    <Text style={styles.cardMetaTexto}>👤 {o.tecnico || '—'}</Text>
-                    <Text style={styles.cardMetaTexto}>📅 {o.dataAbertura}</Text>
-                  </View>
+                  {o.gerada && (
+                    <TouchableOpacity style={styles.pdfSideBtn} onPress={() => gerarPDFOS(o)}>
+                      <Text style={styles.pdfSideTexto}>📄{'\n'}PDF</Text>
+                    </TouchableOpacity>
+                  )}
                 </View>
               ))
             )
@@ -102,19 +110,26 @@ export default function AdminScreen() {
               <Text style={styles.vazio}>Nenhum relatório encontrado.</Text>
             ) : (
               relatoriosFiltrados.map(r => (
-                <View key={r.id} style={styles.card}>
-                  <View style={styles.cardHeader}>
-                    <Text style={styles.cardNumero}>Reembolso</Text>
-                    <View style={[styles.badge, r.gerado ? styles.badgeOk : styles.badgePend]}>
-                      <Text style={styles.badgeTexto}>{r.gerado ? 'Gerado' : 'Em andamento'}</Text>
+                <View key={r.id} style={styles.row}>
+                  <View style={[styles.card, { flex: 1 }]}>
+                    <View style={styles.cardHeader}>
+                      <Text style={styles.cardNumero}>Reembolso</Text>
+                      <View style={[styles.badge, r.gerado ? styles.badgeOk : styles.badgePend]}>
+                        <Text style={styles.badgeTexto}>{r.gerado ? 'Gerado' : 'Em andamento'}</Text>
+                      </View>
+                    </View>
+                    <Text style={styles.cardCliente}>{r.clientes}</Text>
+                    <View style={styles.cardMeta}>
+                      <Text style={styles.cardMetaTexto}>👤 {r.tecnico || '—'}</Text>
+                      <Text style={styles.cardMetaTexto}>📅 {r.periodo || r.dataCriacao}</Text>
+                      <Text style={styles.cardMetaTexto}>🧾 {r.notas.length} nota(s)</Text>
                     </View>
                   </View>
-                  <Text style={styles.cardCliente}>{r.clientes}</Text>
-                  <View style={styles.cardMeta}>
-                    <Text style={styles.cardMetaTexto}>👤 {r.tecnico || '—'}</Text>
-                    <Text style={styles.cardMetaTexto}>📅 {r.periodo || r.dataCriacao}</Text>
-                    <Text style={styles.cardMetaTexto}>🧾 {r.notas.length} nota(s)</Text>
-                  </View>
+                  {r.gerado && (
+                    <TouchableOpacity style={styles.pdfSideBtn} onPress={() => gerarPDFReembolso(r)}>
+                      <Text style={styles.pdfSideTexto}>📄{'\n'}PDF</Text>
+                    </TouchableOpacity>
+                  )}
                 </View>
               ))
             )
@@ -148,6 +163,13 @@ const styles = StyleSheet.create({
 
   lista: { padding: 16, paddingTop: 4, gap: 10 },
   vazio: { color: Colors.textSecondary, textAlign: 'center', marginTop: 40 },
+
+  row: { flexDirection: 'row', gap: 8 },
+  pdfSideBtn: {
+    width: 70, borderRadius: 12, borderWidth: 1, borderColor: Colors.primary,
+    alignItems: 'center', justifyContent: 'center', backgroundColor: '#2A1E00',
+  },
+  pdfSideTexto: { color: Colors.primary, fontWeight: 'bold', fontSize: 12, textAlign: 'center' },
 
   card: {
     backgroundColor: Colors.card, borderRadius: 12,

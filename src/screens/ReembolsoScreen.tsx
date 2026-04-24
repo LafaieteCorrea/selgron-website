@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
-  ScrollView, Image, FlatList, Switch, Platform,
+  ScrollView, Image, FlatList, Switch,
 } from 'react-native';
 import { showAlert } from '../utils/alert';
 import * as ImagePicker from 'expo-image-picker';
-import * as Print from 'expo-print';
-import * as Sharing from 'expo-sharing';
 import { Colors } from '../theme/colors';
 import DatePicker from '../components/DatePicker';
 import {
@@ -14,115 +12,10 @@ import {
   salvarRelatorio, getRelatorios,
   getUsuarioLogado, gerarId, calcularTotalNotas,
 } from '../utils/storage';
+import { gerarPDFReembolso } from '../utils/pdf';
 
 type Tela = 'lista' | 'novoRelatorio' | 'adicionarNota' | 'verRelatorio';
 const TIPOS_NOTA: TipoNota[] = ['Combustível', 'Hospedagem', 'Alimentação', 'Pedágio', 'Outros'];
-
-function construirHTMLRelatorio(r: RelatorioReembolso): string {
-  const total = calcularTotalNotas(r.notas);
-
-  const linhasTabela = r.notas.map((n, i) => `
-    <tr>
-      <td>${i + 1}</td>
-      <td>${n.dataHora}</td>
-      <td>${n.tipo}</td>
-      <td>${n.descricao || '-'}</td>
-      <td style="text-align:right;font-weight:bold">R$ ${parseFloat(n.valor.replace(',', '.')).toFixed(2)}</td>
-      <td style="text-align:center">${n.extraviada ? '<span style="color:#cc4400">Extraviada</span>' : '✓'}</td>
-    </tr>
-  `).join('');
-
-  const paginasFotos = r.notas
-    .filter(n => n.fotoBase64 && !n.extraviada)
-    .map((n, i) => `
-      <div style="page-break-before:always;padding:24px">
-        <div style="color:#F5A200;font-size:14px;font-weight:bold;letter-spacing:2px;margin-bottom:4px">COMPROVANTE ${i + 1}</div>
-        <div style="font-size:11px;color:#888;margin-bottom:20px">Relatório: ${r.clientes} — ${r.periodo}</div>
-        <div style="display:flex;gap:16px;margin-bottom:20px">
-          <div style="flex:1">
-            <div style="font-size:9px;color:#999;letter-spacing:1px;margin-bottom:3px">TIPO</div>
-            <div style="background:#f5f5f5;padding:7px 10px;border-radius:4px;font-size:13px">${n.tipo}</div>
-          </div>
-          <div style="flex:1">
-            <div style="font-size:9px;color:#999;letter-spacing:1px;margin-bottom:3px">DATA</div>
-            <div style="background:#f5f5f5;padding:7px 10px;border-radius:4px;font-size:13px">${n.dataHora}</div>
-          </div>
-          <div style="flex:1">
-            <div style="font-size:9px;color:#999;letter-spacing:1px;margin-bottom:3px">VALOR</div>
-            <div style="background:#fff8e6;padding:7px 10px;border-radius:4px;font-size:15px;font-weight:bold;color:#F5A200">R$ ${parseFloat(n.valor.replace(',', '.')).toFixed(2)}</div>
-          </div>
-        </div>
-        ${n.descricao ? `
-        <div style="font-size:9px;color:#999;letter-spacing:1px;margin-bottom:3px">DESCRIÇÃO</div>
-        <div style="background:#f5f5f5;padding:7px 10px;border-radius:4px;font-size:13px;margin-bottom:20px">${n.descricao}</div>
-        ` : ''}
-        <div style="text-align:center">
-          <img src="${n.fotoBase64}" style="width:480px;max-height:360px;object-fit:contain;border-radius:8px;border:1px solid #ddd"/>
-          <div style="font-size:10px;color:#999;margin-top:8px">${n.tipo} — ${n.dataHora}</div>
-        </div>
-      </div>
-    `).join('');
-
-  return `
-    <html><head><meta charset="UTF-8">
-    <style>
-      body{font-family:Arial;padding:24px;color:#1A1A1A;font-size:13px}
-      h1{color:#F5A200;font-size:20px;margin:0}
-      .sub{color:#888;font-size:11px;margin:4px 0 20px}
-      .grid{display:flex;gap:16px;margin-bottom:10px}
-      .col{flex:1}
-      .lb{font-size:9px;color:#999;letter-spacing:1px;margin-bottom:3px}
-      .vl{background:#f5f5f5;padding:7px 10px;border-radius:4px;font-size:13px}
-      table{width:100%;border-collapse:collapse;margin-top:20px}
-      th{background:#F5A200;color:#1A1A1A;padding:8px;font-size:11px;text-align:left}
-      td{padding:7px 8px;border-bottom:1px solid #eee;vertical-align:top;font-size:12px}
-      .total-box{text-align:right;margin-top:16px;padding:14px;background:#fff8e6;border-radius:8px;border:1px solid #F5A200}
-      .total-val{font-size:20px;font-weight:bold;color:#F5A200}
-      .rodape{margin-top:32px;font-size:10px;color:#999;text-align:center;border-top:1px solid #eee;padding-top:12px}
-    </style></head><body>
-    <h1>SELGRON — Relatório de Reembolso</h1>
-    <div class="sub">Gerado em ${new Date().toLocaleString('pt-BR')}</div>
-    <div class="grid">
-      <div class="col"><div class="lb">TÉCNICO</div><div class="vl">${r.tecnico}</div></div>
-      <div class="col"><div class="lb">PERÍODO</div><div class="vl">${r.periodo}</div></div>
-    </div>
-    <div class="grid">
-      <div class="col"><div class="lb">CLIENTE(S)</div><div class="vl">${r.clientes}</div></div>
-      <div class="col"><div class="lb">ACOMPANHANTES</div><div class="vl">${r.acompanhantes || '-'}</div></div>
-    </div>
-    ${r.observacoes ? `<div class="lb">OBSERVAÇÕES</div><div class="vl">${r.observacoes}</div>` : ''}
-    <table>
-      <tr><th>#</th><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th><th>Nota</th></tr>
-      ${linhasTabela}
-    </table>
-    <div class="total-box">
-      <div style="font-size:11px;color:#999;margin-bottom:4px">TOTAL GERAL</div>
-      <div class="total-val">R$ ${total.toFixed(2)}</div>
-    </div>
-    <div class="rodape">Selgron Field Tech App — VERSÃO DEMONSTRAÇÃO</div>
-    ${paginasFotos}
-    </body></html>
-  `;
-}
-
-async function abrirPDF(r: RelatorioReembolso): Promise<void> {
-  const html = construirHTMLRelatorio(r);
-
-  if (Platform.OS === 'web') {
-    // Abre o popup SINCRONAMENTE pra não perder o user-gesture context.
-    const w = window.open('', '_blank');
-    if (!w) {
-      showAlert('Popup bloqueado', 'Libere popups para este site e tente novamente.');
-      return;
-    }
-    w.document.write(html);
-    w.document.close();
-    setTimeout(() => w.print(), 500);
-  } else {
-    const { uri } = await Print.printToFileAsync({ html });
-    await Sharing.shareAsync(uri, { mimeType: 'application/pdf', dialogTitle: 'Exportar Relatório' });
-  }
-}
 
 export default function ReembolsoScreen() {
   const [tela, setTela] = useState<Tela>('lista');
@@ -255,24 +148,10 @@ export default function ReembolsoScreen() {
 
   async function gerarPDF(rel?: RelatorioReembolso) {
     const alvo = rel ?? relatorioAtual;
-    if (!alvo || alvo.notas.length === 0) {
-      showAlert('Atenção', 'Adicione pelo menos uma despesa.');
-      return;
-    }
+    if (!alvo) return;
 
-    // Abre o popup ANTES de qualquer await — preserva o user-gesture no navegador.
-    let winWeb: Window | null = null;
-    if (Platform.OS === 'web') {
-      winWeb = window.open('', '_blank');
-      if (!winWeb) {
-        showAlert('Popup bloqueado', 'Libere popups para este site e tente novamente.');
-        return;
-      }
-    }
+    await gerarPDFReembolso(alvo);
 
-    const html = construirHTMLRelatorio(alvo);
-
-    // Marca como gerado em paralelo — se ainda não estiver
     if (!alvo.gerado) {
       const atualizado = { ...alvo, gerado: true };
       const erro = await salvarRelatorio(atualizado);
@@ -280,15 +159,6 @@ export default function ReembolsoScreen() {
         if (!rel) setRelatorioAtual(atualizado);
         setRelatorios(prev => prev.map(r => r.id === atualizado.id ? atualizado : r));
       }
-    }
-
-    if (Platform.OS === 'web' && winWeb) {
-      winWeb.document.write(html);
-      winWeb.document.close();
-      setTimeout(() => winWeb!.print(), 500);
-    } else if (Platform.OS !== 'web') {
-      const { uri } = await Print.printToFileAsync({ html });
-      await Sharing.shareAsync(uri, { mimeType: 'application/pdf', dialogTitle: 'Exportar Relatório' });
     }
   }
 
@@ -468,12 +338,22 @@ export default function ReembolsoScreen() {
 
   // ─── Tela: Lista ──────────────────────────────────────────────────────────
 
+  const perfilAtual = getUsuarioLogado()?.perfil;
+  const soRegistro = perfilAtual === 'gestor';
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.botaoNovo} onPress={() => setTela('novoRelatorio')}>
         <Text style={styles.botaoTexto}>+ NOVO RELATÓRIO</Text>
       </TouchableOpacity>
-      {relatorios.length === 0 ? (
+      {soRegistro ? (
+        <View style={styles.vazio}>
+          <Text style={styles.textoVazio}>
+            Para consultar relatórios, acesse a aba{'\n'}
+            <Text style={{ color: Colors.primary, fontWeight: 'bold' }}>📊 Painel</Text>.
+          </Text>
+        </View>
+      ) : relatorios.length === 0 ? (
         <View style={styles.vazio}>
           <Text style={styles.textoVazio}>Nenhum relatório criado ainda.</Text>
         </View>
