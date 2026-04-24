@@ -1,13 +1,7 @@
-// Polyfills precisam rodar ANTES de qualquer import que use URL/FormData
-// (ex: @supabase/supabase-js). Em Hermes+release, URL nao existe e
-// FormData as vezes nao esta no global. Sintoma: app crashava com
-// "ReferenceError: Property 'FormData' doesn't exist".
-import 'react-native-url-polyfill/auto';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-if (typeof (globalThis as any).FormData === 'undefined') {
-  const RNFormData = require('react-native/Libraries/Network/FormData');
-  (globalThis as any).FormData = RNFormData.default ?? RNFormData;
-}
+// ATENCAO: './polyfills' tem que ser o PRIMEIRO import — configura URL
+// e FormData globais antes de qualquer outra lib (ex: supabase-js) tentar
+// usar. Se trocar de ordem, o app crasha no boot em Hermes/release.
+import './polyfills';
 
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';

@@ -1,0 +1,1154 @@
+[2026-04-24 14:01:22.053 Uid(value=10218):16102:16102 I/om.dp.logcatapp]
+Using CollectorTypeCC GC.
+
+[2026-04-24 14:01:22.186 Uid(value=10218):16102:16102 D/nativeloader]
+Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+
+[2026-04-24 14:01:22.289 Uid(value=10218):16102:16102 D/ActivityThread]
+handleBindApplication()++ app=com.dp.logcatapp
+
+[2026-04-24 14:01:22.291 Uid(value=10218):16102:16102 D/CompatibilityChangeReporter]
+Compat change id reported: 171979766; UID 10218; state: ENABLED
+
+[2026-04-24 14:01:22.395 Uid(value=10218):16102:16102 D/nativeloader]
+Configuring clns-4 for other apk /data/app/~~T8OEpYVaYF7RM9H4oLWzRg==/com.dp.logcatapp-LHQPmHfjFgEkhEA4bwJzvQ==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~T8OEpYVaYF7RM9H4oLWzRg==/com.dp.logcatapp-LHQPmHfjFgEkhEA4bwJzvQ==/lib/arm:/data/app/~~T8OEpYVaYF7RM9H4oLWzRg==/com.dp.logcatapp-LHQPmHfjFgEkhEA4bwJzvQ==/base.apk!/lib/armeabi-v7a, permitted_path=/data:/mnt/expand:/data/user/0/com.dp.logcatapp
+
+[2026-04-24 14:01:22.415 Uid(value=10218):16102:16102 D/nativeloader]
+Load libframework-connectivity-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity.jar: ok
+
+[2026-04-24 14:01:22.425 Uid(value=10218):16102:16102 V/GraphicsEnvironment]
+ANGLE Developer option for 'com.dp.logcatapp' set to: 'default'
+
+[2026-04-24 14:01:22.426 Uid(value=10218):16102:16102 V/GraphicsEnvironment]
+ANGLE GameManagerService for com.dp.logcatapp: false
+
+[2026-04-24 14:01:22.426 Uid(value=10218):16102:16102 V/GraphicsEnvironment]
+Neither updatable production driver nor prerelease driver is supported.
+
+[2026-04-24 14:01:22.430 Uid(value=10218):16102:16102 D/ActivityThread]
+handleBindApplication data=AppBindData{appInfo=ApplicationInfo{f63d8c6 com.dp.logcatapp}} appContext=android.app.ContextImpl@8b3d087 appContext.mOpPackageName=com.dp.logcatapp appContext.mBasePackageName=com.dp.logcatapp appContext.mPackageInfo=android.app.LoadedApk@d831bb4 data.restrictedBackupMode= false data.providers= [ContentProviderInfo{name=com.dp.logcatapp.androidx-startup className=androidx.startup.InitializationProvider}, ContentProviderInfo{name=com.dp.logcatapp.file_provider className=androidx.core.content.FileProvider}]
+
+[2026-04-24 14:01:22.431 Uid(value=10218):16102:16102 D/LoadedApk]
+LoadedApk::makeApplication() appContext.mOpPackageName=com.dp.logcatapp appContext.mBasePackageName=com.dp.logcatapp
+
+[2026-04-24 14:01:22.431 Uid(value=10218):16102:16102 D/NetworkSecurityConfig]
+No Network Security Config specified, using platform default
+
+[2026-04-24 14:01:22.434 Uid(value=10218):16102:16102 D/NetworkSecurityConfig]
+No Network Security Config specified, using platform default
+
+[2026-04-24 14:01:22.492 Uid(value=10218):16102:16102 D/ActivityThread]
+handleBindApplication() --
+
+[2026-04-24 14:01:22.630 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:01:22.814 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:01:23.059 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:01:23.080 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:01:23.097 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.relayoutWindow:8088
+
+[2026-04-24 14:01:23.160 Uid(value=10218):16102:16996 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788100, sSize:4608000, line = 2444
+
+[2026-04-24 14:01:23.163 Uid(value=10218):16102:16996 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788106, sSize:4608000, line = 2444
+
+[2026-04-24 14:01:23.163 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788106 line = 2599
+
+[2026-04-24 14:01:23.166 Uid(value=10218):16102:16996 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788109, sSize:4608000, line = 2444
+
+[2026-04-24 14:01:23.169 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788112, sSize:4608000, line = 2444
+
+[2026-04-24 14:01:23.301 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#0](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:01:23.306 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:01:23.313 Uid(value=10218):16102:16995 I/OpenGLRenderer]
+Davey! duration=842ms; Flags=1, FrameTimelineVsyncId=24805349, IntendedVsync=157439351957596, Vsync=157439519121376, InputEventId=0, HandleInputStart=157439530923850, AnimationStart=157439530926465, PerformTraversalsStart=157439531177081, DrawStart=157440042440003, FrameDeadline=157439368624263, FrameInterval=157439530905427, FrameStartTime=16716378, SyncQueued=157440059616042, SyncStart=157440065940349, IssueDrawCommandsStart=157440066420388, SwapBuffers=157440196233503, FrameCompleted=157440200923388, DequeueBufferDuration=0, QueueBufferDuration=637500, GpuCompleted=157440200923388, SwapBuffersCompleted=157440198557080, DisplayPresentTime=0, CommandSubmissionCompleted=157440196233503, 
+
+[2026-04-24 14:01:23.454 Uid(value=10218):16102:16102 I/Choreographer]
+Skipped 46 frames!  The application may be doing too much work on its main thread.
+
+[2026-04-24 14:01:23.532 Uid(value=10218):16102:17009 D/IMGGralloc]
+Gralloc Register  w:768, h:968, f:0x101, usage:0x900, ui64Stamp:788154, sSize:2998272, line = 2444
+
+[2026-04-24 14:01:23.548 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:968, f:0x101, usage:0x900, ui64Stamp:788154 line = 2599
+
+[2026-04-24 14:01:23.552 Uid(value=10218):16102:17009 D/IMGGralloc]
+Gralloc Register  w:768, h:968, f:0x101, usage:0x900, ui64Stamp:788156, sSize:2998272, line = 2444
+
+[2026-04-24 14:01:23.552 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:768, h:968, f:0x101, usage:0xb00, ui64Stamp:788159, sSize:2998272, line = 2444
+
+[2026-04-24 14:01:23.554 Uid(value=10218):16102:17009 D/IMGGralloc]
+Gralloc Register  w:768, h:968, f:0x101, usage:0x900, ui64Stamp:788165, sSize:2998272, line = 2444
+
+[2026-04-24 14:01:23.604 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#1](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:01:23.605 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:01:23.614 Uid(value=10218):16102:16995 I/OpenGLRenderer]
+Davey! duration=929ms; Flags=1, FrameTimelineVsyncId=24805481, IntendedVsync=157439569217323, Vsync=157440338058333, InputEventId=0, HandleInputStart=157440350796657, AnimationStart=157440350799503, PerformTraversalsStart=157440352266311, DrawStart=157440437731118, FrameDeadline=157439585883990, FrameInterval=157440350703734, FrameStartTime=16713935, SyncQueued=157440443886926, SyncStart=157440448999311, IssueDrawCommandsStart=157440449209465, SwapBuffers=157440498785272, FrameCompleted=157440503951503, DequeueBufferDuration=0, QueueBufferDuration=526423, GpuCompleted=157440503951503, SwapBuffersCompleted=157440500911157, DisplayPresentTime=16843449, CommandSubmissionCompleted=157440498785272, 
+
+[2026-04-24 14:01:23.677 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788109 line = 2599
+
+[2026-04-24 14:01:23.681 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788176, sSize:4608000, line = 2444
+
+[2026-04-24 14:01:23.704 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:968, f:0x101, usage:0x900, ui64Stamp:788165 line = 2599
+
+[2026-04-24 14:01:23.708 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:768, h:968, f:0x101, usage:0xb00, ui64Stamp:788178, sSize:2998272, line = 2444
+
+[2026-04-24 14:01:23.718 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788100 line = 2599
+
+[2026-04-24 14:01:23.722 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788180, sSize:4608000, line = 2444
+
+[2026-04-24 14:01:23.875 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:968, f:0x101, usage:0x900, ui64Stamp:788156 line = 2599
+
+[2026-04-24 14:01:23.878 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:768, h:968, f:0x101, usage:0xb00, ui64Stamp:788183, sSize:2998272, line = 2444
+
+[2026-04-24 14:01:26.161 Uid(value=10218):16102:16975 W/om.dp.logcatapp]
+Cleared Reference was only reachable from finalizer (only reported once)
+
+[2026-04-24 14:01:26.177 Uid(value=10218):16102:16975 I/om.dp.logcatapp]
+NativeAlloc concurrent copying GC freed 1117KB AllocSpace bytes, 5(100KB) LOS objects, 49% free, 5501KB/10MB, paused 134us,65us total 115.010ms
+
+[2026-04-24 14:01:28.000 Uid(value=10218):16102:16102 D/CompatibilityChangeReporter]
+Compat change id reported: 78294732; UID 10218; state: ENABLED
+
+[2026-04-24 14:01:28.000 Uid(value=10218):16102:16102 D/LogcatReader]
+[HomeScreen] LogcatService - start service
+
+[2026-04-24 14:01:28.020 Uid(value=10218):16102:16102 D/LogcatReader]
+[HomeScreen] LogcatService - bind service
+
+[2026-04-24 14:01:28.027 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:5529
+
+[2026-04-24 14:01:28.045 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.relayoutWindow:8088
+
+[2026-04-24 14:01:28.089 Uid(value=10218):16102:16102 D/LogcatReader]
+[qu1] Default buffers: [main, system, crash, kernel]
+
+[2026-04-24 14:01:28.110 Uid(value=10218):16102:16102 D/LogcatReader]
+[qu1] Available buffers: [crash, events, kernel, main, radio, security, system]
+
+[2026-04-24 14:01:28.131 Uid(value=10218):16102:16102 D/LogcatReader]
+[ku1] starting
+
+[2026-04-24 14:01:28.131 Uid(value=10218):16102:17004 D/LogcatReader]
+[ku1] initialize logcat capabilities
+
+[2026-04-24 14:01:28.133 Uid(value=10218):16102:16102 D/CompatibilityChangeReporter]
+Compat change id reported: 160794467; UID 10218; state: ENABLED
+
+[2026-04-24 14:01:28.183 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@c8fa3e0[MainActivity]
+
+[2026-04-24 14:01:28.184 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:01:28.193 Uid(value=10218):16102:17006 D/LogcatReader]
+[ku1] logcat capabilities: LogcatCapabilities(uidSupported=true, yearSupported=true)
+
+[2026-04-24 14:01:28.195 Uid(value=10218):16102:16102 D/LogcatReader]
+[HomeScreen] LogcatService - onServiceConnected
+
+[2026-04-24 14:01:28.422 Uid(value=10218):16102:17075 D/ProfileInstaller]
+Installing profile for com.dp.logcatapp
+
+[2026-04-24 14:01:34.778 Uid(value=10218):16102:16987 D/OpenGLRenderer]
+endAllActiveAnimators on 0x902c3400 (uo3) with handle 0x925466b0
+
+[2026-04-24 14:01:34.780 Uid(value=10218):16102:16980 D/IMGGralloc]
+Gralloc Free  w:768, h:968, f:0x101, usage:0xb00, ui64Stamp:788183 line = 2599
+
+[2026-04-24 14:01:34.796 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:01:34.800 Uid(value=10218):16102:17012 D/IMGGralloc]
+Gralloc Free  w:768, h:968, f:0x101, usage:0xb00, ui64Stamp:788159 line = 2599
+
+[2026-04-24 14:01:34.801 Uid(value=10218):16102:17012 D/IMGGralloc]
+Gralloc Free  w:768, h:968, f:0x101, usage:0xb00, ui64Stamp:788178 line = 2599
+
+[2026-04-24 14:01:34.807 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:01:34.893 Uid(value=10218):16102:17112 D/IMGGralloc]
+Gralloc Register  w:768, h:1216, f:0x101, usage:0x900, ui64Stamp:788279, sSize:3735552, line = 2444
+
+[2026-04-24 14:01:34.895 Uid(value=10218):16102:17112 D/IMGGralloc]
+Gralloc Register  w:768, h:1216, f:0x101, usage:0x900, ui64Stamp:788281, sSize:3735552, line = 2444
+
+[2026-04-24 14:01:34.897 Uid(value=10218):16102:17112 D/IMGGralloc]
+Gralloc Register  w:768, h:1216, f:0x101, usage:0x900, ui64Stamp:788284, sSize:3735552, line = 2444
+
+[2026-04-24 14:01:34.903 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:1216, f:0x101, usage:0x900, ui64Stamp:788284 line = 2599
+
+[2026-04-24 14:01:34.907 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:768, h:1216, f:0x101, usage:0xb00, ui64Stamp:788286, sSize:3735552, line = 2444
+
+[2026-04-24 14:01:34.913 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#2](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:01:34.914 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:01:34.939 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:5529
+
+[2026-04-24 14:01:34.979 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@f0394f[MainActivity]
+
+[2026-04-24 14:01:34.979 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:01:36.051 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:1216, f:0x101, usage:0x900, ui64Stamp:788281 line = 2599
+
+[2026-04-24 14:01:36.054 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:768, h:1216, f:0x101, usage:0xb00, ui64Stamp:788299, sSize:3735552, line = 2444
+
+[2026-04-24 14:01:36.067 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:1216, f:0x101, usage:0x900, ui64Stamp:788279 line = 2599
+
+[2026-04-24 14:01:36.070 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:768, h:1216, f:0x101, usage:0xb00, ui64Stamp:788303, sSize:3735552, line = 2444
+
+[2026-04-24 14:01:36.163 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:1216, f:0x101, usage:0xb00, ui64Stamp:788303 line = 2599
+
+[2026-04-24 14:01:36.163 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:768, h:1216, f:0x101, usage:0xb00, ui64Stamp:788299 line = 2599
+
+[2026-04-24 14:01:36.164 Uid(value=10218):16102:16987 D/OpenGLRenderer]
+endAllActiveAnimators on 0xb9156000 (uo3) with handle 0xb95b53e0
+
+[2026-04-24 14:01:36.165 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:768, h:1216, f:0x101, usage:0xb00, ui64Stamp:788286 line = 2599
+
+[2026-04-24 14:01:36.183 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:5529
+
+[2026-04-24 14:01:36.199 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:01:36.199 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:01:41.686 Uid(value=10218):16102:16102 D/CompatibilityChangeReporter]
+Compat change id reported: 171228096; UID 10218; state: ENABLED
+
+[2026-04-24 14:01:44.648 Uid(value=10218):16102:16975 I/om.dp.logcatapp]
+Background concurrent copying GC freed 4441KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 6627KB/12MB, paused 114us,135us total 121.535ms
+
+[2026-04-24 14:02:05.840 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788180 line = 2599
+
+[2026-04-24 14:02:05.841 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788176 line = 2599
+
+[2026-04-24 14:02:05.854 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788112 line = 2599
+
+[2026-04-24 14:02:11.419 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:11.477 Uid(value=10218):16102:17353 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788550, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:11.479 Uid(value=10218):16102:17353 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788552, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:11.481 Uid(value=10218):16102:17353 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788554, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:11.483 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788554 line = 2599
+
+[2026-04-24 14:02:11.487 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788556, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:11.490 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#3](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:11.629 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788552 line = 2599
+
+[2026-04-24 14:02:11.632 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788559, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:11.654 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788550 line = 2599
+
+[2026-04-24 14:02:11.655 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:02:11.655 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:11.658 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788563, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:17.506 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788563 line = 2599
+
+[2026-04-24 14:02:17.507 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788556 line = 2599
+
+[2026-04-24 14:02:17.518 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788559 line = 2599
+
+[2026-04-24 14:02:22.752 Uid(value=10218):16102:17420 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788660, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:22.754 Uid(value=10218):16102:17420 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788664, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:22.757 Uid(value=10218):16102:17420 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788666, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:22.765 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788666 line = 2599
+
+[2026-04-24 14:02:22.770 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788670, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:22.776 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#4](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:22.786 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788664 line = 2599
+
+[2026-04-24 14:02:22.794 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788673, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:22.819 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788660 line = 2599
+
+[2026-04-24 14:02:22.825 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788675, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:22.832 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:02:22.832 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:23.679 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:23.682 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:23.694 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:02:23.750 Uid(value=10218):16102:17422 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788680, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:23.752 Uid(value=10218):16102:17422 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788684, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:23.754 Uid(value=10218):16102:17422 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788686, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:23.763 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788686 line = 2599
+
+[2026-04-24 14:02:23.766 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788692, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:23.769 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#5](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:23.770 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:02:23.788 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788684 line = 2599
+
+[2026-04-24 14:02:23.791 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788700, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:23.817 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788680 line = 2599
+
+[2026-04-24 14:02:23.819 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788702, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:23.824 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@8990f29[MainActivity]
+
+[2026-04-24 14:02:23.824 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:25.539 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788700 line = 2599
+
+[2026-04-24 14:02:25.540 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788692 line = 2599
+
+[2026-04-24 14:02:25.541 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788702 line = 2599
+
+[2026-04-24 14:02:25.578 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:02:25.578 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:27.852 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788675 line = 2599
+
+[2026-04-24 14:02:27.853 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788670 line = 2599
+
+[2026-04-24 14:02:27.863 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788673 line = 2599
+
+[2026-04-24 14:02:31.429 Uid(value=10218):16102:17508 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788908, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:31.432 Uid(value=10218):16102:17508 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788912, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:31.436 Uid(value=10218):16102:17508 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788915, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:31.437 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788915 line = 2599
+
+[2026-04-24 14:02:31.441 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788917, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:31.444 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#6](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:31.572 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788912 line = 2599
+
+[2026-04-24 14:02:31.576 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788919, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:31.602 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788908 line = 2599
+
+[2026-04-24 14:02:31.602 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:02:31.602 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:31.606 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788922, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:32.234 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:32.237 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:32.249 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:02:32.299 Uid(value=10218):16102:17516 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788928, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:32.301 Uid(value=10218):16102:17516 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788932, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:32.304 Uid(value=10218):16102:17516 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788934, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:32.312 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788934 line = 2599
+
+[2026-04-24 14:02:32.315 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788940, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:32.318 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#7](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:32.319 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:02:32.349 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788932 line = 2599
+
+[2026-04-24 14:02:32.352 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788948, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:32.371 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788928 line = 2599
+
+[2026-04-24 14:02:32.374 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788950, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:32.375 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@5d3d18[MainActivity]
+
+[2026-04-24 14:02:32.375 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:33.747 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788948 line = 2599
+
+[2026-04-24 14:02:33.748 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788940 line = 2599
+
+[2026-04-24 14:02:33.749 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788950 line = 2599
+
+[2026-04-24 14:02:33.771 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.SavedLogsViewerActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:02:33.838 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.SavedLogsViewerActivity from=android.view.ViewRootImpl.relayoutWindow:8088
+
+[2026-04-24 14:02:33.846 Uid(value=10218):16102:17522 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788980, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:33.849 Uid(value=10218):16102:17522 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788984, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:33.853 Uid(value=10218):16102:17522 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788988, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:33.856 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788988 line = 2599
+
+[2026-04-24 14:02:33.860 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788995, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:33.865 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[SavedLogsViewerActivity]#8](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:33.866 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:02:34.028 Uid(value=10218):16102:16975 I/om.dp.logcatapp]
+Background concurrent copying GC freed 6215KB AllocSpace bytes, 4(80KB) LOS objects, 49% free, 8480KB/16MB, paused 186us,163us total 149.818ms
+
+[2026-04-24 14:02:34.048 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788984 line = 2599
+
+[2026-04-24 14:02:34.053 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789007, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:34.061 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:788980 line = 2599
+
+[2026-04-24 14:02:34.061 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@a77c128[SavedLogsViewerActivity]
+
+[2026-04-24 14:02:34.061 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:34.067 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789010, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:34.373 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788922 line = 2599
+
+[2026-04-24 14:02:34.373 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788917 line = 2599
+
+[2026-04-24 14:02:34.382 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788919 line = 2599
+
+[2026-04-24 14:02:40.557 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=Janela pop-up from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:02:40.566 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:40.600 Uid(value=10218):16102:17550 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789017, sSize:344064, line = 2444
+
+[2026-04-24 14:02:40.602 Uid(value=10218):16102:17550 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789021, sSize:344064, line = 2444
+
+[2026-04-24 14:02:40.603 Uid(value=10218):16102:17550 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789025, sSize:344064, line = 2444
+
+[2026-04-24 14:02:40.606 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789025 line = 2599
+
+[2026-04-24 14:02:40.608 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789029, sSize:344064, line = 2444
+
+[2026-04-24 14:02:40.610 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[Janela pop-up]#9](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:40.611 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:02:40.629 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789021 line = 2599
+
+[2026-04-24 14:02:40.631 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789036, sSize:344064, line = 2444
+
+[2026-04-24 14:02:40.646 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789017 line = 2599
+
+[2026-04-24 14:02:40.648 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789038, sSize:344064, line = 2444
+
+[2026-04-24 14:02:40.670 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() nf2{2ae1feb V.E...... ........ 0,0-373,128 #1020002 android:id/content}
+
+[2026-04-24 14:02:40.670 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:42.069 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789029 line = 2599
+
+[2026-04-24 14:02:42.070 Uid(value=10218):16102:16987 D/OpenGLRenderer]
+endAllActiveAnimators on 0xc5818400 (uo3) with handle 0x9eca3f80
+
+[2026-04-24 14:02:42.082 Uid(value=10218):16102:16980 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789036 line = 2599
+
+[2026-04-24 14:02:42.083 Uid(value=10218):16102:16980 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789038 line = 2599
+
+[2026-04-24 14:02:42.104 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@a77c128[SavedLogsViewerActivity]
+
+[2026-04-24 14:02:42.104 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:43.558 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:43.572 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.SavedLogsViewerActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:02:43.637 Uid(value=10218):16102:17574 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789050, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:43.639 Uid(value=10218):16102:17574 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789054, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:43.641 Uid(value=10218):16102:17574 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789058, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:43.649 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789058 line = 2599
+
+[2026-04-24 14:02:43.652 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789060, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:43.655 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[SavedLogsViewerActivity]#10](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:43.656 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:02:43.676 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789054 line = 2599
+
+[2026-04-24 14:02:43.679 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789068, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:43.685 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789050 line = 2599
+
+[2026-04-24 14:02:43.686 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@6385b34[SavedLogsViewerActivity]
+
+[2026-04-24 14:02:43.686 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:43.689 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789070, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:43.845 Uid(value=10218):16102:16975 I/om.dp.logcatapp]
+Background young concurrent copying GC freed 4276KB AllocSpace bytes, 2(104KB) LOS objects, 28% free, 11MB/16MB, paused 155us,84us total 124.282ms
+
+[2026-04-24 14:02:51.118 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789068 line = 2599
+
+[2026-04-24 14:02:51.119 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789060 line = 2599
+
+[2026-04-24 14:02:51.121 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789070 line = 2599
+
+[2026-04-24 14:02:51.155 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@a77c128[SavedLogsViewerActivity]
+
+[2026-04-24 14:02:51.155 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:51.681 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:51.693 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.SavedLogsViewerActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:02:51.751 Uid(value=10218):16102:17760 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789080, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:51.753 Uid(value=10218):16102:17760 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789082, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:51.755 Uid(value=10218):16102:17760 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789084, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:51.761 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789084 line = 2599
+
+[2026-04-24 14:02:51.765 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789087, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:51.769 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[SavedLogsViewerActivity]#11](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:51.771 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:02:51.787 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789082 line = 2599
+
+[2026-04-24 14:02:51.792 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789094, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:51.796 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789080 line = 2599
+
+[2026-04-24 14:02:51.798 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@c956d29[SavedLogsViewerActivity]
+
+[2026-04-24 14:02:51.798 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:51.800 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789096, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:52.045 Uid(value=10218):16102:16975 I/om.dp.logcatapp]
+Background concurrent copying GC freed 5595KB AllocSpace bytes, 1(24KB) LOS objects, 49% free, 11MB/22MB, paused 104us,161us total 198.701ms
+
+[2026-04-24 14:02:56.898 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789094 line = 2599
+
+[2026-04-24 14:02:56.899 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789087 line = 2599
+
+[2026-04-24 14:02:56.900 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789096 line = 2599
+
+[2026-04-24 14:02:56.937 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@a77c128[SavedLogsViewerActivity]
+
+[2026-04-24 14:02:56.937 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:58.067 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:02:58.101 Uid(value=10218):16102:17800 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789113, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:58.104 Uid(value=10218):16102:17800 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789115, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:58.106 Uid(value=10218):16102:17800 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789117, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:58.113 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789117 line = 2599
+
+[2026-04-24 14:02:58.116 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789119, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:58.120 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#12](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:02:58.175 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:02:58.175 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:02:58.352 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789115 line = 2599
+
+[2026-04-24 14:02:58.355 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789130, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:58.602 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789113 line = 2599
+
+[2026-04-24 14:02:58.605 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789132, sSize:4608000, line = 2444
+
+[2026-04-24 14:02:58.639 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789010 line = 2599
+
+[2026-04-24 14:02:58.640 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:788995 line = 2599
+
+[2026-04-24 14:02:58.641 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789007 line = 2599
+
+[2026-04-24 14:03:04.627 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789130 line = 2599
+
+[2026-04-24 14:03:04.632 Uid(value=10218):16102:16979 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789132 line = 2599
+
+[2026-04-24 14:03:04.635 Uid(value=10218):16102:16979 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789119 line = 2599
+
+[2026-04-24 14:03:13.164 Uid(value=10218):16102:18076 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789529, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.166 Uid(value=10218):16102:18076 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789533, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.168 Uid(value=10218):16102:18076 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789537, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.171 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789537 line = 2599
+
+[2026-04-24 14:03:13.174 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789539, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.177 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#13](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:03:13.287 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789533 line = 2599
+
+[2026-04-24 14:03:13.288 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:03:13.288 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:03:13.290 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789542, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.313 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789529 line = 2599
+
+[2026-04-24 14:03:13.316 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789544, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.807 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:03:13.811 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:03:13.823 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.MainActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:03:13.874 Uid(value=10218):16102:18084 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789549, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.876 Uid(value=10218):16102:18084 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789553, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.878 Uid(value=10218):16102:18084 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789557, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.886 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789557 line = 2599
+
+[2026-04-24 14:03:13.889 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789561, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.891 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#14](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:03:13.892 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:03:13.910 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789553 line = 2599
+
+[2026-04-24 14:03:13.913 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789564, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:13.923 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@e7ef680[MainActivity]
+
+[2026-04-24 14:03:13.923 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:03:13.931 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789549 line = 2599
+
+[2026-04-24 14:03:13.934 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789566, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:15.099 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789564 line = 2599
+
+[2026-04-24 14:03:15.100 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789561 line = 2599
+
+[2026-04-24 14:03:15.101 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789566 line = 2599
+
+[2026-04-24 14:03:15.121 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.SavedLogsViewerActivity from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:03:15.179 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=com.dp.logcatapp/com.dp.logcatapp.activities.SavedLogsViewerActivity from=android.view.ViewRootImpl.relayoutWindow:8088
+
+[2026-04-24 14:03:15.186 Uid(value=10218):16102:18093 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789595, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:15.190 Uid(value=10218):16102:18093 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789599, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:15.193 Uid(value=10218):16102:18093 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789604, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:15.195 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789604 line = 2599
+
+[2026-04-24 14:03:15.199 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789608, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:15.203 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[SavedLogsViewerActivity]#15](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:03:15.204 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:03:15.424 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789599 line = 2599
+
+[2026-04-24 14:03:15.428 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789620, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:15.444 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789595 line = 2599
+
+[2026-04-24 14:03:15.445 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@2ff50f5[SavedLogsViewerActivity]
+
+[2026-04-24 14:03:15.445 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:03:15.448 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789623, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:15.695 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789544 line = 2599
+
+[2026-04-24 14:03:15.696 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789539 line = 2599
+
+[2026-04-24 14:03:15.705 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789542 line = 2599
+
+[2026-04-24 14:03:16.577 Uid(value=10218):16102:16975 I/om.dp.logcatapp]
+Background young concurrent copying GC freed 7751KB AllocSpace bytes, 2(40KB) LOS objects, 35% free, 14MB/22MB, paused 282us,87us total 165.805ms
+
+[2026-04-24 14:03:17.585 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=Janela pop-up from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:03:17.595 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:03:17.633 Uid(value=10218):16102:18110 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789628, sSize:344064, line = 2444
+
+[2026-04-24 14:03:17.635 Uid(value=10218):16102:18110 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789630, sSize:344064, line = 2444
+
+[2026-04-24 14:03:17.636 Uid(value=10218):16102:18110 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789634, sSize:344064, line = 2444
+
+[2026-04-24 14:03:17.645 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789634 line = 2599
+
+[2026-04-24 14:03:17.647 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789636, sSize:344064, line = 2444
+
+[2026-04-24 14:03:17.649 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[Janela pop-up]#16](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:03:17.651 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:03:17.676 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789630 line = 2599
+
+[2026-04-24 14:03:17.678 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789643, sSize:344064, line = 2444
+
+[2026-04-24 14:03:17.692 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0x900, ui64Stamp:789628 line = 2599
+
+[2026-04-24 14:03:17.694 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789645, sSize:344064, line = 2444
+
+[2026-04-24 14:03:17.700 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() nf2{976a3d3 V.E...... ........ 0,0-373,128 #1020002 android:id/content}
+
+[2026-04-24 14:03:17.700 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:03:18.611 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789645 line = 2599
+
+[2026-04-24 14:03:18.612 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789636 line = 2599
+
+[2026-04-24 14:03:18.613 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:437, h:192, f:0x101, usage:0xb00, ui64Stamp:789643 line = 2599
+
+[2026-04-24 14:03:18.652 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@2ff50f5[SavedLogsViewerActivity]
+
+[2026-04-24 14:03:18.652 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:03:18.946 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:03:19.000 Uid(value=10218):16102:18122 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789659, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:19.004 Uid(value=10218):16102:18122 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789661, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:19.007 Uid(value=10218):16102:18122 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789663, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:19.010 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789663 line = 2599
+
+[2026-04-24 14:03:19.014 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789665, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:19.017 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[MainActivity]#17](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:03:19.139 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789661 line = 2599
+
+[2026-04-24 14:03:19.142 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789674, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:19.152 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0x900, ui64Stamp:789659 line = 2599
+
+[2026-04-24 14:03:19.152 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() DecorView@44f76c3[MainActivity]
+
+[2026-04-24 14:03:19.152 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
+[2026-04-24 14:03:19.156 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789676, sSize:4608000, line = 2444
+
+[2026-04-24 14:03:19.523 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789620 line = 2599
+
+[2026-04-24 14:03:19.524 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789608 line = 2599
+
+[2026-04-24 14:03:19.525 Uid(value=10218):16102:16987 D/OpenGLRenderer]
+endAllActiveAnimators on 0x93a33300 (uo3) with handle 0xeeff1930
+
+[2026-04-24 14:03:19.536 Uid(value=10218):16102:16102 D/IMGGralloc]
+Gralloc Free  w:720, h:1600, f:0x101, usage:0xb00, ui64Stamp:789623 line = 2599
+
+[2026-04-24 14:03:20.510 Uid(value=10218):16102:16102 D/InsetsController]
+onStateChanged: InsetsState: {mDisplayFrame=Rect(0, 0 - 720, 1600), mDisplayCutout=DisplayCutout{insets=Rect(0, 45 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(272, 0 - 448, 45), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=720 displayHeight=1600 physicalDisplayWidth=720 physicalDisplayHeight=1600 density={2.0} cutoutSpec={M 0,0 H -44 V 22.5 H 44 V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}  mRoundedCornerFrame=Rect(0, 0 - 720, 1600), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(528, 0 - 692, 48) rotation=0}, mSources= { InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_GESTURES, mFrame=[0,0][0,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_GESTURES, mFrame=[720,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_MANDATORY_GESTURES, mFrame=[0,0][720,69], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_MANDATORY_GESTURES, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_LEFT_DISPLAY_CUTOUT, mFrame=[0,0][-100000,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_DISPLAY_CUTOUT, mFrame=[0,0][720,45], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_RIGHT_DISPLAY_CUTOUT, mFrame=[100000,0][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_DISPLAY_CUTOUT, mFrame=[0,100000][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_TOP_TAPPABLE_ELEMENT, mFrame=[0,0][720,48], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_BOTTOM_TAPPABLE_ELEMENT, mFrame=[0,1504][720,1600], mVisible=true, mInsetsRoundedCornerFrame=false}, InsetsSource: {mType=ITYPE_IME, mFrame=[0,0][0,0], mVisible=false, mInsetsRoundedCornerFrame=false} } host=Janela pop-up from=android.view.ViewRootImpl.setView:1250
+
+[2026-04-24 14:03:20.519 Uid(value=10218):16102:16102 W/OnBackInvokedCallback]
+OnBackInvokedCallback is not enabled for the application.
+Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+
+[2026-04-24 14:03:20.584 Uid(value=10218):16102:18137 D/IMGGralloc]
+Gralloc Register  w:380, h:768, f:0x101, usage:0x900, ui64Stamp:789681, sSize:1179648, line = 2444
+
+[2026-04-24 14:03:20.585 Uid(value=10218):16102:18137 D/IMGGralloc]
+Gralloc Register  w:380, h:768, f:0x101, usage:0x900, ui64Stamp:789683, sSize:1179648, line = 2444
+
+[2026-04-24 14:03:20.587 Uid(value=10218):16102:18137 D/IMGGralloc]
+Gralloc Register  w:380, h:768, f:0x101, usage:0x900, ui64Stamp:789685, sSize:1179648, line = 2444
+
+[2026-04-24 14:03:20.592 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:380, h:768, f:0x101, usage:0x900, ui64Stamp:789685 line = 2599
+
+[2026-04-24 14:03:20.595 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:380, h:768, f:0x101, usage:0xb00, ui64Stamp:789690, sSize:1179648, line = 2444
+
+[2026-04-24 14:03:20.597 Uid(value=10218):16102:16987 I/BLASTBufferQueue]
+[VRI[Janela pop-up]#18](f:0,a:0) onFrameAvailable the first frame is available
+
+[2026-04-24 14:03:20.599 Uid(value=10218):16102:16987 W/Parcel]
+Expecting binder but got null!
+
+[2026-04-24 14:03:20.619 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:380, h:768, f:0x101, usage:0x900, ui64Stamp:789683 line = 2599
+
+[2026-04-24 14:03:20.621 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:380, h:768, f:0x101, usage:0xb00, ui64Stamp:789699, sSize:1179648, line = 2444
+
+[2026-04-24 14:03:20.635 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Free  w:380, h:768, f:0x101, usage:0x900, ui64Stamp:789681 line = 2599
+
+[2026-04-24 14:03:20.637 Uid(value=10218):16102:16987 D/IMGGralloc]
+Gralloc Register  w:380, h:768, f:0x101, usage:0xb00, ui64Stamp:789701, sSize:1179648, line = 2444
+
+[2026-04-24 14:03:20.647 Uid(value=10218):16102:16102 D/InputMethodManager]
+prepareNavigationBarInfo() nf2{b46b2e0 V.E...... ........ 0,0-316,704 #1020002 android:id/content}
+
+[2026-04-24 14:03:20.647 Uid(value=10218):16102:16102 D/InputMethodManager]
+getNavigationBarColor() Fail
+
