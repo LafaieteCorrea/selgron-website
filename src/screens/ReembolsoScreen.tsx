@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
-  ScrollView, Image, FlatList, Switch,
+  ScrollView, Image, FlatList, Switch, Alert, Platform,
 } from 'react-native';
 import { showAlert } from '../utils/alert';
 import * as ImagePicker from 'expo-image-picker';
@@ -37,6 +37,7 @@ export default function ReembolsoScreen() {
   const [fotoBase64, setFotoBase64] = useState<string>('');
   const [extraviada, setExtraviada] = useState(false);
   const [dataNotaDate, setDataNotaDate] = useState<Date>(new Date());
+  const [notaEditandoId, setNotaEditandoId] = useState<string | null>(null);
 
   useEffect(() => { if (tela === 'lista') carregarRelatorios(); }, [tela]);
 
@@ -88,6 +89,43 @@ export default function ReembolsoScreen() {
   function limparCamposNota() {
     setTipo('Combustível'); setValor(''); setDescricao('');
     setFotoUri(null); setFotoBase64(''); setExtraviada(false); setDataNotaDate(new Date());
+    setNotaEditandoId(null);
+  }
+
+  function iniciarEditarNota(n: NotaReembolso) {
+    setNotaEditandoId(n.id);
+    setTipo(n.tipo);
+    setValor(n.valor);
+    setDescricao(n.descricao);
+    setFotoUri(n.fotoUri || null);
+    setFotoBase64(n.fotoBase64 || '');
+    setExtraviada(n.extraviada);
+    // n.dataHora vem como "dd/mm/yyyy"; se falhar, usa hoje
+    const m = n.dataHora?.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+    setDataNotaDate(m ? new Date(+m[3], +m[2] - 1, +m[1]) : new Date());
+    setTela('adicionarNota');
+  }
+
+  function confirmarExcluirNota(n: NotaReembolso) {
+    const titulo = 'Excluir despesa';
+    const msg = `Remover ${n.tipo} de R$ ${parseFloat(n.valor.replace(',', '.')).toFixed(2)}?`;
+    const executar = () => excluirNota(n.id);
+    if (Platform.OS === 'web') {
+      if (typeof window !== 'undefined' && window.confirm(`${titulo}\n\n${msg}`)) executar();
+    } else {
+      Alert.alert(titulo, msg, [
+        { text: 'Cancelar', style: 'cancel' },
+        { text: 'Excluir', style: 'destructive', onPress: executar },
+      ]);
+    }
+  }
+
+  async function excluirNota(id: string) {
+    if (!relatorioAtual) return;
+    const atualizado = { ...relatorioAtual, notas: relatorioAtual.notas.filter(n => n.id !== id) };
+    const erro = await salvarRelatorio(atualizado);
+    if (erro) { showAlert('Erro ao excluir', erro); return; }
+    setRelatorioAtual(atualizado);
   }
 
   async function tirarFoto() {
@@ -122,20 +160,32 @@ export default function ReembolsoScreen() {
     setFotoBase64('');
   }
 
-  async function adicionarNota() {
+  async function salvarNota() {
     if (!valor) { showAlert('Atenção', 'Informe o valor.'); return; }
     if (!extraviada && !fotoUri) { showAlert('Atenção', 'Tire a foto ou marque como extraviada.'); return; }
     if (!relatorioAtual) return;
 
-    const nota: NotaReembolso = {
-      id: gerarId(), tipo, valor, descricao,
+    const dadosNota = {
+      tipo, valor, descricao,
       fotoUri: fotoUri || '',
       fotoBase64: fotoBase64 || '',
       extraviada,
       dataHora: dataNotaDate.toLocaleDateString('pt-BR'),
     };
 
-    const atualizado = { ...relatorioAtual, notas: [...relatorioAtual.notas, nota] };
+    let atualizado: RelatorioReembolso;
+    if (notaEditandoId) {
+      atualizado = {
+        ...relatorioAtual,
+        notas: relatorioAtual.notas.map(n =>
+          n.id === notaEditandoId ? { ...n, ...dadosNota } : n
+        ),
+      };
+    } else {
+      const nova: NotaReembolso = { id: gerarId(), ...dadosNota };
+      atualizado = { ...relatorioAtual, notas: [...relatorioAtual.notas, nova] };
+    }
+
     const erro = await salvarRelatorio(atualizado);
     if (erro) {
       showAlert('Erro ao salvar despesa', erro);
@@ -196,7 +246,7 @@ export default function ReembolsoScreen() {
   if (tela === 'adicionarNota') {
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.scroll}>
-        <Text style={styles.tituloPagina}>ADICIONAR DESPESA</Text>
+        <Text style={styles.tituloPagina}>{notaEditandoId ? 'EDITAR DESPESA' : 'ADICIONAR DESPESA'}</Text>
 
         <Text style={styles.label}>Tipo de nota</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: 4 }}>
@@ -260,8 +310,8 @@ export default function ReembolsoScreen() {
           </View>
         )}
 
-        <TouchableOpacity style={styles.botao} onPress={adicionarNota}>
-          <Text style={styles.botaoTexto}>ADICIONAR AO RELATÓRIO</Text>
+        <TouchableOpacity style={styles.botao} onPress={salvarNota}>
+          <Text style={styles.botaoTexto}>{notaEditandoId ? 'SALVAR ALTERAÇÕES' : 'ADICIONAR AO RELATÓRIO'}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.botaoSecundario} onPress={() => { limparCamposNota(); setTela('verRelatorio'); }}>
           <Text style={styles.botaoSecundarioTexto}>Cancelar</Text>
@@ -313,6 +363,14 @@ export default function ReembolsoScreen() {
               {n.fotoUri ? (
                 <Image source={{ uri: n.fotoUri }} style={styles.fotoNota} resizeMode="cover" />
               ) : null}
+              <View style={styles.notaAcoesRow}>
+                <TouchableOpacity style={styles.notaAcaoBtn} onPress={() => iniciarEditarNota(n)}>
+                  <Text style={styles.notaAcaoTexto}>✏ Editar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.notaAcaoBtn, styles.notaAcaoExcluir]} onPress={() => confirmarExcluirNota(n)}>
+                  <Text style={[styles.notaAcaoTexto, styles.notaAcaoTextoExcluir]}>🗑 Excluir</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           ))}
 
@@ -436,6 +494,11 @@ const styles = StyleSheet.create({
   extraviadaBadge: { backgroundColor: '#3A1A1A', borderRadius: 4, paddingHorizontal: 8, paddingVertical: 3, marginTop: 8, alignSelf: 'flex-start' },
   extraviadaTexto: { color: Colors.error, fontSize: 11 },
   fotoNota: { width: '100%', height: 160, borderRadius: 8, marginTop: 10 },
+  notaAcoesRow: { flexDirection: 'row', gap: 8, marginTop: 12, borderTopWidth: 1, borderTopColor: Colors.border, paddingTop: 10 },
+  notaAcaoBtn: { flex: 1, padding: 10, borderRadius: 6, alignItems: 'center', borderWidth: 1, borderColor: Colors.border, backgroundColor: Colors.background },
+  notaAcaoTexto: { color: Colors.primary, fontSize: 13, fontWeight: 'bold' },
+  notaAcaoExcluir: { borderColor: Colors.error },
+  notaAcaoTextoExcluir: { color: Colors.error },
   totalCard: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#2A1E00', borderRadius: 10, padding: 16, marginTop: 8, borderWidth: 1, borderColor: Colors.primary },
   totalLabel: { color: Colors.textSecondary, fontSize: 14 },
   totalValor: { color: Colors.primary, fontWeight: '900', fontSize: 22 },

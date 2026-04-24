@@ -136,6 +136,10 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          autoCorrect={false}
+          spellCheck={false}
+          autoComplete="email"
+          textContentType="emailAddress"
         />
 
         <Text style={styles.label}>Senha</Text>
@@ -146,6 +150,11 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
           value={senha}
           onChangeText={setSenha}
           secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          spellCheck={false}
+          autoComplete="password"
+          textContentType="password"
         />
 
         {erro ? <Text style={styles.erro}>{erro}</Text> : null}
@@ -193,6 +202,10 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
               placeholderTextColor={Colors.textSecondary}
               keyboardType="email-address"
               autoCapitalize="none"
+              autoCorrect={false}
+              spellCheck={false}
+              autoComplete="email"
+              textContentType="emailAddress"
             />
 
             <View style={styles.modalBotoes}>
@@ -233,6 +246,9 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
               onChangeText={setNovoNome}
               placeholder="Nome completo"
               placeholderTextColor={Colors.textSecondary}
+              autoCorrect={false}
+              autoComplete="name"
+              textContentType="name"
             />
 
             <Text style={styles.label}>Email</Text>
@@ -244,6 +260,10 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
               placeholderTextColor={Colors.textSecondary}
               keyboardType="email-address"
               autoCapitalize="none"
+              autoCorrect={false}
+              spellCheck={false}
+              autoComplete="email"
+              textContentType="emailAddress"
             />
 
             <Text style={styles.label}>Senha</Text>
@@ -254,6 +274,11 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
               placeholder="Mínimo 6 caracteres"
               placeholderTextColor={Colors.textSecondary}
               secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              spellCheck={false}
+              autoComplete="password-new"
+              textContentType="newPassword"
             />
 
             <Text style={styles.label}>Confirmar senha</Text>
@@ -264,6 +289,11 @@ export default function LoginScreen({ onLogin }: { onLogin: () => void }) {
               placeholder="••••••"
               placeholderTextColor={Colors.textSecondary}
               secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              spellCheck={false}
+              autoComplete="password-new"
+              textContentType="newPassword"
             />
 
             <View style={styles.modalBotoes}>
