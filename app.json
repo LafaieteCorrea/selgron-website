@@ -30,10 +30,11 @@
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "permissions": [
-        "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "READ_MEDIA_IMAGES"
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
@@ -53,8 +54,9 @@
     ],
     "extra": {
       "eas": {
-        "projectId": ""
+        "projectId": "f2830b98-1375-4816-aa3b-017b12d3ac29"
       }
-    }
+    },
+    "owner": "lafaietec"
   }
 }
