@@ -1,0 +1,11 @@
+# Config global do projeto Supabase.
+# O project-ref esta definido ao dar `supabase link`.
+
+[functions.admin-create-user]
+# verify_jwt=false: a funcao valida o JWT manualmente
+# (auth.getUser + checa perfil admin). Necessario porque o algoritmo
+# ES256 da publishable key nao eh suportado pelo verify_jwt built-in.
+verify_jwt = false
+
+[functions.admin-reset-password]
+verify_jwt = false
