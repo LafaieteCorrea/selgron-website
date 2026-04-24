@@ -445,6 +445,28 @@ export async function deletarUsuario(id: string): Promise<string | null> {
   return error ? error.message : null;
 }
 
+export async function atualizarNomeProprio(nome: string): Promise<string | null> {
+  const u = getUsuarioLogado();
+  if (!u) return 'Não autenticado.';
+  const nomeTrim = nome.trim();
+  if (!nomeTrim) return 'Nome nao pode ficar vazio.';
+  const { error } = await supabase.from('profiles').update({ nome: nomeTrim }).eq('id', u.id);
+  if (error) return error.message;
+  setUsuarioAtual({ ...u, nome: nomeTrim });
+  return null;
+}
+
+export async function atualizarEmailProprio(email: string): Promise<string | null> {
+  const emailTrim = email.trim().toLowerCase();
+  if (!emailTrim.endsWith('@selgron.com.br')) {
+    return 'O email precisa ser do domínio @selgron.com.br.';
+  }
+  const { error } = await supabase.auth.updateUser({ email: emailTrim });
+  if (error) return error.message;
+  // Supabase pode exigir confirmacao no novo email antes de aplicar.
+  return null;
+}
+
 export async function alterarSenhaPropria(senhaAntiga: string, novaSenha: string): Promise<string | null> {
   const u = getUsuarioLogado();
   if (!u) return 'Não autenticado.';

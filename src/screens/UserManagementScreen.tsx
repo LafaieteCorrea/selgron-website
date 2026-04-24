@@ -7,6 +7,7 @@ import { Colors } from '../theme/colors';
 import {
   Usuario, getUsuarios, criarUsuario, atualizarPerfil,
   deletarUsuario, alterarSenhaPropria, adminAlterarSenha,
+  atualizarNomeProprio, atualizarEmailProprio,
   getUsuarioLogado,
 } from '../utils/storage';
 
@@ -15,6 +16,8 @@ type UsuarioComAtivo = Usuario & { ativo: boolean };
 export default function UserManagementScreen() {
   const usuarioLogado = getUsuarioLogado();
   const isAdmin = usuarioLogado?.perfil === 'admin';
+
+  if (!isAdmin) return <MeuPerfil />;
 
   const [usuarios, setUsuarios] = useState<UsuarioComAtivo[]>([]);
   const [carregando, setCarregando] = useState(false);
@@ -372,5 +375,203 @@ const styles = StyleSheet.create({
   msgSucesso: {
     color: '#6bff9e', backgroundColor: '#0d2d1a',
     padding: 10, borderRadius: 8, marginBottom: 12, fontSize: 13,
+  },
+});
+
+// ─── Tela do proprio perfil (tecnicos e gestores) ─────────────────────────
+
+function MeuPerfil() {
+  const usuario = getUsuarioLogado();
+  const [nome, setNome] = useState(usuario?.nome ?? '');
+  const [email, setEmail] = useState(usuario?.email ?? '');
+  const [senhaAtual, setSenhaAtual] = useState('');
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmSenha, setConfirmSenha] = useState('');
+
+  const [salvandoDados, setSalvandoDados] = useState(false);
+  const [msgDados, setMsgDados] = useState<{ tipo: 'ok' | 'erro'; texto: string } | null>(null);
+
+  const [salvandoSenha, setSalvandoSenha] = useState(false);
+  const [msgSenha, setMsgSenha] = useState<{ tipo: 'ok' | 'erro'; texto: string } | null>(null);
+
+  async function salvarDados() {
+    setMsgDados(null);
+    if (!nome.trim()) { setMsgDados({ tipo: 'erro', texto: 'Informe o nome.' }); return; }
+    setSalvandoDados(true);
+
+    let mudouNome = false, mudouEmail = false, erro: string | null = null;
+
+    if (nome.trim() !== usuario?.nome) {
+      erro = await atualizarNomeProprio(nome);
+      if (erro) { setSalvandoDados(false); setMsgDados({ tipo: 'erro', texto: erro }); return; }
+      mudouNome = true;
+    }
+
+    if (email.trim().toLowerCase() !== usuario?.email.toLowerCase()) {
+      erro = await atualizarEmailProprio(email);
+      if (erro) { setSalvandoDados(false); setMsgDados({ tipo: 'erro', texto: erro }); return; }
+      mudouEmail = true;
+    }
+
+    setSalvandoDados(false);
+    if (mudouNome || mudouEmail) {
+      const partes = [];
+      if (mudouNome) partes.push('nome atualizado');
+      if (mudouEmail) partes.push('um email de confirmacao foi enviado para o novo endereco');
+      setMsgDados({ tipo: 'ok', texto: partes.join(' · ') });
+    } else {
+      setMsgDados({ tipo: 'ok', texto: 'Nada para salvar.' });
+    }
+  }
+
+  async function salvarSenha() {
+    setMsgSenha(null);
+    if (!senhaAtual) { setMsgSenha({ tipo: 'erro', texto: 'Informe a senha atual.' }); return; }
+    if (novaSenha.length < 6) { setMsgSenha({ tipo: 'erro', texto: 'A nova senha deve ter pelo menos 6 caracteres.' }); return; }
+    if (novaSenha !== confirmSenha) { setMsgSenha({ tipo: 'erro', texto: 'As senhas nao coincidem.' }); return; }
+
+    setSalvandoSenha(true);
+    const erro = await alterarSenhaPropria(senhaAtual, novaSenha);
+    setSalvandoSenha(false);
+    if (erro) { setMsgSenha({ tipo: 'erro', texto: erro }); return; }
+    setSenhaAtual(''); setNovaSenha(''); setConfirmSenha('');
+    setMsgSenha({ tipo: 'ok', texto: 'Senha alterada com sucesso!' });
+  }
+
+  return (
+    <ScrollView style={perfilStyles.container} contentContainerStyle={perfilStyles.scroll}>
+      <Text style={perfilStyles.titulo}>Meu Perfil</Text>
+      <Text style={perfilStyles.subtitulo}>{usuario?.perfil}</Text>
+
+      <View style={perfilStyles.card}>
+        <Text style={perfilStyles.secao}>DADOS PESSOAIS</Text>
+
+        {msgDados && (
+          <Text style={msgDados.tipo === 'ok' ? perfilStyles.msgOk : perfilStyles.msgErro}>
+            {msgDados.texto}
+          </Text>
+        )}
+
+        <Text style={perfilStyles.label}>Nome</Text>
+        <TextInput
+          style={perfilStyles.input}
+          value={nome}
+          onChangeText={setNome}
+          placeholderTextColor={Colors.textSecondary}
+        />
+
+        <Text style={perfilStyles.label}>Email</Text>
+        <TextInput
+          style={perfilStyles.input}
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          placeholderTextColor={Colors.textSecondary}
+        />
+        <Text style={perfilStyles.dica}>
+          Alterar o email envia uma confirmacao para o novo endereco antes de aplicar.
+        </Text>
+
+        <TouchableOpacity
+          style={perfilStyles.botao}
+          onPress={salvarDados}
+          disabled={salvandoDados}
+        >
+          {salvandoDados
+            ? <ActivityIndicator color={Colors.textDark} />
+            : <Text style={perfilStyles.botaoTexto}>SALVAR DADOS</Text>
+          }
+        </TouchableOpacity>
+      </View>
+
+      <View style={perfilStyles.card}>
+        <Text style={perfilStyles.secao}>TROCAR SENHA</Text>
+
+        {msgSenha && (
+          <Text style={msgSenha.tipo === 'ok' ? perfilStyles.msgOk : perfilStyles.msgErro}>
+            {msgSenha.texto}
+          </Text>
+        )}
+
+        <Text style={perfilStyles.label}>Senha atual</Text>
+        <TextInput
+          style={perfilStyles.input}
+          value={senhaAtual}
+          onChangeText={setSenhaAtual}
+          secureTextEntry
+          placeholder="••••••"
+          placeholderTextColor={Colors.textSecondary}
+        />
+
+        <Text style={perfilStyles.label}>Nova senha</Text>
+        <TextInput
+          style={perfilStyles.input}
+          value={novaSenha}
+          onChangeText={setNovaSenha}
+          secureTextEntry
+          placeholder="Mínimo 6 caracteres"
+          placeholderTextColor={Colors.textSecondary}
+        />
+
+        <Text style={perfilStyles.label}>Confirmar nova senha</Text>
+        <TextInput
+          style={perfilStyles.input}
+          value={confirmSenha}
+          onChangeText={setConfirmSenha}
+          secureTextEntry
+          placeholder="••••••"
+          placeholderTextColor={Colors.textSecondary}
+        />
+
+        <TouchableOpacity
+          style={perfilStyles.botao}
+          onPress={salvarSenha}
+          disabled={salvandoSenha}
+        >
+          {salvandoSenha
+            ? <ActivityIndicator color={Colors.textDark} />
+            : <Text style={perfilStyles.botaoTexto}>TROCAR SENHA</Text>
+          }
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}
+
+const perfilStyles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: Colors.background },
+  scroll: { padding: 20, paddingBottom: 40, gap: 16 },
+  titulo: { color: Colors.text, fontSize: 20, fontWeight: 'bold' },
+  subtitulo: { color: Colors.textSecondary, fontSize: 12, letterSpacing: 2, textTransform: 'uppercase', marginTop: 2, marginBottom: 12 },
+
+  card: {
+    backgroundColor: Colors.card, borderRadius: 12,
+    borderWidth: 1, borderColor: Colors.border, padding: 16,
+  },
+  secao: {
+    color: Colors.primary, fontSize: 11, fontWeight: 'bold',
+    letterSpacing: 2, marginBottom: 12,
+  },
+  label: { color: Colors.textSecondary, fontSize: 12, marginBottom: 6, marginTop: 10 },
+  input: {
+    backgroundColor: Colors.surface, borderRadius: 8,
+    borderWidth: 1, borderColor: Colors.border,
+    padding: 12, color: Colors.text, fontSize: 14,
+  },
+  dica: { color: Colors.textSecondary, fontSize: 11, marginTop: 6, fontStyle: 'italic' },
+  botao: {
+    backgroundColor: Colors.primary, borderRadius: 8,
+    padding: 14, alignItems: 'center', marginTop: 16,
+  },
+  botaoTexto: { color: Colors.textDark, fontWeight: '900', letterSpacing: 1, fontSize: 13 },
+
+  msgOk: {
+    color: '#6bff9e', backgroundColor: '#0d2d1a',
+    padding: 10, borderRadius: 8, marginBottom: 4, fontSize: 13,
+  },
+  msgErro: {
+    color: '#ff6b6b', backgroundColor: '#2d1010',
+    padding: 10, borderRadius: 8, marginBottom: 4, fontSize: 13,
   },
 });
