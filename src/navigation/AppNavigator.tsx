@@ -88,7 +88,13 @@ export default function AppNavigator({ onLogout }: { onLogout: () => void }) {
     <View style={styles.root}>
       {/* ── Top bar ── */}
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={toggle} style={styles.hamburger}>
+        <TouchableOpacity
+          onPress={toggle}
+          style={styles.hamburger}
+          hitSlop={{ top: 16, bottom: 16, left: 16, right: 16 }}
+          accessibilityLabel="Abrir menu"
+          accessibilityRole="button"
+        >
           <Text style={styles.hamburgerIcon}>☰</Text>
         </TouchableOpacity>
         <Text style={styles.topBarTitle} numberOfLines={1}>
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
 
   topBar: {
-    height: 52,
+    height: 60,
     backgroundColor: Colors.card,
     borderBottomWidth: 1,
     borderBottomColor: Colors.border,
@@ -174,8 +180,8 @@ const styles = StyleSheet.create({
     gap: 12,
     zIndex: 1,
   },
-  hamburger: { padding: 8 },
-  hamburgerIcon: { fontSize: 20, color: Colors.text },
+  hamburger: { padding: 12, minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
+  hamburgerIcon: { fontSize: 28, color: Colors.text, lineHeight: 28 },
   topBarTitle: { flex: 1, color: Colors.text, fontWeight: 'bold', fontSize: 15 },
 
   body: { flex: 1 },
