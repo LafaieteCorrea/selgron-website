@@ -24,80 +24,105 @@ function limparSessaoSupabase() {
   }
 }
 
+// Envolve uma promise em um timeout. Se não resolver em ms, rejeita.
+function comTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error(`timeout ${label}`)), ms);
+    p.then(v => { clearTimeout(t); resolve(v); }, e => { clearTimeout(t); reject(e); });
+  });
+}
+
 export default function App() {
   const [logado, setLogado] = useState(false);
   const [recuperandoSenha, setRecuperandoSenha] = useState(false);
   const [inicializando, setInicializando] = useState(true);
 
   useEffect(() => {
-    let resolvido = false;
+    let cancelado = false;
 
-    // Safety net: se onAuthStateChange nao disparar em 7s, assume sessao corrompida,
-    // limpa localStorage e manda pra tela de login sem travar.
-    const timeoutId = setTimeout(() => {
-      if (!resolvido) {
-        console.warn('[App] auth init timeout — limpando sessao');
-        limparSessaoSupabase();
-        setUsuarioAtual(null);
-        setLogado(false);
-        setInicializando(false);
-      }
-    }, 7000);
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'TOKEN_REFRESHED') return;
-
-      resolvido = true;
-
-      if (event === 'PASSWORD_RECOVERY') {
-        setRecuperandoSenha(true);
-        setLogado(false);
-        setInicializando(false);
-        return;
-      }
-
-      if (!session?.user) {
-        setUsuarioAtual(null);
-        setLogado(false);
-        setInicializando(false);
-        return;
-      }
-
+    async function carregarPerfil(userId: string, email: string): Promise<boolean> {
       try {
-        const { data: perfil, error } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
+        const { data: perfil, error } = await comTimeout(
+          supabase.from('profiles').select('*').eq('id', userId).single(),
+          5000,
+          'profiles.select',
+        );
+        if (error || !perfil || perfil.ativo === false) return false;
+        setUsuarioAtual({ id: userId, nome: perfil.nome, email, perfil: perfil.perfil });
+        return true;
+      } catch (e) {
+        console.error('[App] erro/timeout ao carregar perfil:', e);
+        return false;
+      }
+    }
 
-        if (error || !perfil || perfil.ativo === false) {
-          await supabase.auth.signOut();
-          limparSessaoSupabase();
+    async function inicializar() {
+      try {
+        const { data } = await comTimeout(supabase.auth.getSession(), 5000, 'getSession');
+        if (cancelado) return;
+
+        const session = data?.session;
+        if (!session?.user) {
           setUsuarioAtual(null);
           setLogado(false);
           setInicializando(false);
           return;
         }
 
-        setUsuarioAtual({
-          id: session.user.id,
-          nome: perfil.nome,
-          email: session.user.email!,
-          perfil: perfil.perfil,
-        });
-        setLogado(true);
+        const ok = await carregarPerfil(session.user.id, session.user.email!);
+        if (cancelado) return;
+
+        if (!ok) {
+          try { await comTimeout(supabase.auth.signOut(), 3000, 'signOut'); } catch {}
+          limparSessaoSupabase();
+          setUsuarioAtual(null);
+          setLogado(false);
+        } else {
+          setLogado(true);
+        }
         setInicializando(false);
       } catch (e) {
-        console.error('[App] erro ao carregar perfil:', e);
+        console.warn('[App] init timeout/erro — limpando sessao:', e);
+        if (cancelado) return;
         limparSessaoSupabase();
         setUsuarioAtual(null);
         setLogado(false);
         setInicializando(false);
       }
+    }
+
+    inicializar();
+
+    // onAuthStateChange só pra reagir a eventos DEPOIS do cold start
+    // (login, logout, recuperação de senha em outra aba, etc.)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') return;
+
+      if (event === 'PASSWORD_RECOVERY') {
+        setRecuperandoSenha(true);
+        setLogado(false);
+        return;
+      }
+      if (event === 'SIGNED_OUT' || !session?.user) {
+        setUsuarioAtual(null);
+        setLogado(false);
+        return;
+      }
+      if (event === 'SIGNED_IN') {
+        const ok = await carregarPerfil(session.user.id, session.user.email!);
+        if (!ok) {
+          try { await supabase.auth.signOut(); } catch {}
+          limparSessaoSupabase();
+          setUsuarioAtual(null);
+          setLogado(false);
+        } else {
+          setLogado(true);
+        }
+      }
     });
 
     return () => {
-      clearTimeout(timeoutId);
+      cancelado = true;
       subscription.unsubscribe();
     };
   }, []);
