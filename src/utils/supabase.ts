@@ -2,8 +2,11 @@ import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
-const URL  = process.env.EXPO_PUBLIC_SUPABASE_URL!;
-const KEY  = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
+// NAO usar o identificador `URL` aqui — eh o construtor global JS
+// (new URL(...)). Sobrescrever quebra bibliotecas que dependem dele
+// (ex: @supabase/supabase-js faz new URL() internamente).
+const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL!;
+const SUPABASE_KEY = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
 
 const isWeb = Platform.OS === 'web';
 
@@ -22,7 +25,7 @@ if (isWeb && typeof window !== 'undefined') {
   } catch { /* localStorage pode estar bloqueado */ }
 }
 
-export const supabase = createClient(URL, KEY, {
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
